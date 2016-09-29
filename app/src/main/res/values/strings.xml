@@ -5,4 +5,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="devoloper_openresource_string">"作者：Thinkwee|Sworduo\nEmail:thinkwee2767@gmail.com\n版本:V1.1.4\n\n本项目开源，Github地址\ngithub.com/thinkwee/BuptRoom.git\n"</string>
+
+
+
+    <string name="version">"版本号:V1.1.4\n\n\n1. 优化代码结构整理架构\n2. 为2.0版本大更新做准备\n3. 增加在线GitHub查看"</string>
+
 </resources>

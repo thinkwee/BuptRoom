@@ -24,12 +24,16 @@
             android:title="图书馆" />
     </group>
 
-    <item android:title="关于">
+    <item android:title="软件信息">
         <menu>
             <item
-                android:id="@+id/about"
+                android:id="@+id/developer_opensource"
                 android:icon="@drawable/ic_menu_help"
-                android:title="关于本软件" />
+                android:title="作者及开源信息" />
+            <item
+                android:id="@+id/version"
+                android:icon="@drawable/ic_menu_help"
+                android:title="版本说明" />
         </menu>
     </item>
 
