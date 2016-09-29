@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/jiao1"
+            android:icon="@drawable/ic_menu_home"
+            android:title="教一" />
+        <item
+            android:id="@+id/jiao2"
+            android:icon="@drawable/ic_menu_home"
+            android:title="教二" />
+        <item
+            android:id="@+id/jiao3"
+            android:icon="@drawable/ic_menu_home"
+            android:title="教三" />
+        <item
+            android:id="@+id/jiao4"
+            android:icon="@drawable/ic_menu_home"
+            android:title="教四" />
+        <item
+            android:id="@+id/tushuguan"
+            android:icon="@drawable/ic_menu_home"
+            android:title="图书馆" />
+    </group>
+
+    <item android:title="关于">
+        <menu>
+            <item
+                android:id="@+id/about"
+                android:icon="@drawable/ic_menu_help"
+                android:title="关于本软件" />
+        </menu>
+    </item>
+
+</menu>
