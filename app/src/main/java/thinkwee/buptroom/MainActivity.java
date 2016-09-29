@@ -169,14 +169,16 @@ public class MainActivity extends AppCompatActivity
             }else if (id == R.id.developer_opensource) {
                 this.setTitle("作者及开源信息");
                 tv.setText(R.string.devoloper_openresource_string);
-                webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom.git");
+                webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom/tree/master/app");
                 webViewgit.setVisibility(View.VISIBLE);
 
             }
             else if (id == R.id.version) {
-                webViewgit.setVisibility(View.INVISIBLE);
+
                 this.setTitle("版本说明");
                 tv.setText(R.string.version );
+                webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom/blob/master/README.md");
+                webViewgit.setVisibility(View.VISIBLE);
             }
         }else{
             EmptyRoom emptyroom=new EmptyRoom();
@@ -203,14 +205,15 @@ public class MainActivity extends AppCompatActivity
             } else if (id == R.id.developer_opensource) {
                 this.setTitle("作者及开源信息");
                 tv.setText(R.string.devoloper_openresource_string);
-                webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom.git");
+                webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom/tree/master/app");
                 webViewgit.setVisibility(View.VISIBLE);
 
 
             }else if (id == R.id.version) {
-                webViewgit.setVisibility(View.INVISIBLE);
                 this.setTitle("版本说明");
                 tv.setText(R.string.version );
+                webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom/blob/master/README.md");
+                webViewgit.setVisibility(View.VISIBLE);
             }
         }
 
