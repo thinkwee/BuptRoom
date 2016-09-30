@@ -17,21 +17,22 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+
+
+        </android.support.v7.widget.Toolbar>
+
+
+
+
+
 
 
 
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        app:rippleColor="#6E6E6E"
-        android:layout_margin="@dimen/fab_margin"
 
-        android:src="@drawable/ic_dialog_time" />
 
 </android.support.design.widget.CoordinatorLayout>

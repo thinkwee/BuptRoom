@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity
                 return true;
             }
         });
-
         tv=(TextView)findViewById(R.id.show_content);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new JavascriptHandler(), "handler");
@@ -108,18 +107,6 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        final TimeInfo timeinfo= new TimeInfo();
-        timeinfo.timesetting();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "今天是"+timeinfo.Timestring+" "+timeinfo.nowtime+"\n"+interesting[timeinfo.daycount], Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         webView.loadUrl("http://jwxt.bupt.edu.cn/zxqDtKxJas.jsp");
         TimerTask task= new TimerTask() {
             @Override
@@ -129,6 +116,41 @@ public class MainActivity extends AppCompatActivity
         };
         Timer timer=new Timer();
         timer.schedule(task,3000);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.bug_deliver) {
+            String[] email = {"thinkwee2767@gmail.com"}; // 需要注意，email必须以数组形式传入
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("message/rfc822"); // 设置邮件格式
+            intent.putExtra(Intent.EXTRA_EMAIL, email); // 接收人
+            intent.putExtra(Intent.EXTRA_SUBJECT, "BuptRoom错误报告"); // 主题
+            intent.putExtra(Intent.EXTRA_TEXT, "Hi~ o(*￣▽￣*)ブ我在使用BuptRoom时遇到了以下问题，请尽快解决:\n"); // 正文
+            startActivity(Intent.createChooser(intent, "请选择邮件类应用以发送错误报告"));
+            return true;
+        }else
+        if(id==R.id.timeinfo){
+            final TimeInfo timeinfo= new TimeInfo();
+            timeinfo.timesetting();
+            Snackbar.make(webView, "今天是"+timeinfo.Timestring+" "+timeinfo.nowtime+"\n"+interesting[timeinfo.daycount], Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
