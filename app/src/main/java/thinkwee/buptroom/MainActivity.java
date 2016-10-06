@@ -297,10 +297,10 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void Notification_show(String flag){
+    public void Notification_show(String Notification_content){
         /**
          * Created by Thinkwee on 2016/9/28 0028 9:26
-         * Parameter [flag] 显示的正文
+         * Parameter [Notification_content] 显示的正文
          * Return void
          * CLASS:MainActivity
          * FILE:MainActivity.java
@@ -311,11 +311,11 @@ public class MainActivity extends AppCompatActivity
         Notification.Builder mBuilder = new Notification.Builder(this);
         Bitmap LB=BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
         mBuilder.setContentTitle("BuptRoom")                        //标题
-                .setContentText(flag)      //内容
+                .setContentText(Notification_content)             //内容
                 .setSubText("滑动取消此消息")                    //内容下面的一小段文字
-                .setTicker("BuptRoom提醒")             //收到信息后状态栏显示的文字信息
-                .setWhen(System.currentTimeMillis())           //设置通知时间
-                .setSmallIcon(R.mipmap.ic_launcher)            //设置小图标
+                .setTicker("BuptRoom提醒")                      //收到信息后状态栏显示的文字信息
+                .setWhen(System.currentTimeMillis())              //设置通知时间
+                .setSmallIcon(R.mipmap.ic_launcher)             //设置小图标
                 .setLargeIcon(LB)                     //设置大图标
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)    //设置默认的三色灯与振动器
                 .setAutoCancel(true)                           //设置点击后取消Notification
