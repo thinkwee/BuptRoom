@@ -2,39 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/jiao1"
-            android:icon="@drawable/ic_menu_home"
-            android:title="教一" />
-        <item
-            android:id="@+id/jiao2"
-            android:icon="@drawable/ic_menu_home"
-            android:title="教二" />
-        <item
-            android:id="@+id/jiao3"
-            android:icon="@drawable/ic_menu_home"
-            android:title="教三" />
-        <item
-            android:id="@+id/jiao4"
-            android:icon="@drawable/ic_menu_home"
-            android:title="教四" />
-        <item
-            android:id="@+id/tushuguan"
-            android:icon="@drawable/ic_menu_home"
-            android:title="图书馆" />
+
+        <item android:title="界面">
+            <menu>
+                <item
+                    android:id="@+id/homepage"
+                    android:icon="@drawable/ic_menu_home"
+                    android:title="首页" />
+                <item
+                    android:id="@+id/jiaoshi"
+                    android:icon="@drawable/ic_menu_home"
+                    android:title="空闲教室查询" />
+            </menu>
+        </item>
+        <item android:title="软件信息">
+            <menu>
+                <item
+                    android:id="@+id/developer_opensource"
+                    android:icon="@drawable/ic_menu_help"
+                    android:title="作者及开源信息" />
+                <item
+                    android:id="@+id/version"
+                    android:icon="@drawable/ic_menu_help"
+                    android:title="版本说明" />
+            </menu>
+        </item>
     </group>
 
-    <item android:title="软件信息">
-        <menu>
-            <item
-                android:id="@+id/developer_opensource"
-                android:icon="@drawable/ic_menu_help"
-                android:title="作者及开源信息" />
-            <item
-                android:id="@+id/version"
-                android:icon="@drawable/ic_menu_help"
-                android:title="版本说明" />
-        </menu>
-    </item>
+
 
 </menu>

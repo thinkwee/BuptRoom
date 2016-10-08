@@ -1,50 +1,39 @@
 package thinkwee.buptroom;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
+
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.NotificationCompat;
+
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
+
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AlertDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
+
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
+import android.widget.TextView;
+
 
 import org.jsoup.Jsoup;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,16 +41,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private WebView webView;
-    private WebView webViewgit;
     private TextView tv;
-    private String Tag="jsptohtml";
-    private String title=null;
-    private Button bt;
     private org.jsoup.nodes.Document document;
     private String htmlbody=null;
-    private int count;
-    private TextView timeinfo;
-
     private String[] interesting={" ヾ(o◕∀◕)ﾉ新的一周新的开始!",
                                     " π__π默默学习不说话",
                                     " （╯－＿－）╯╧╧ 学海无涯苦作舟",
@@ -71,7 +53,9 @@ public class MainActivity extends AppCompatActivity
                                     " (╭￣3￣)╭♡ 忘记明天是周一吧"};
     private int HaveNetFlag=0;
     private int WrongNet=1;
-    private int webviewchoose=0;
+    private FragmentManager manager;
+    private FragmentTransaction transaction;
+    private BuildingFragment buildingfragment;
 
 
     /**
@@ -82,24 +66,19 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.setTitle("主页");
+        HomePageFragment homepagefragment= new HomePageFragment();
+        manager = this.getFragmentManager();
+        transaction = manager.beginTransaction();
+        transaction.replace(R.id.frame, homepagefragment);
+        transaction.commit();
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        webView = (WebView)findViewById(R.id.web);
-        webViewgit = (WebView)findViewById(R.id.webgit);
-        webViewgit.getSettings().setJavaScriptEnabled(true);
-        webViewgit.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view,String url){
-                view.loadUrl(url);
-                return true;
-            }
-        });
-        tv=(TextView)findViewById(R.id.show_content);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.addJavascriptInterface(new JavascriptHandler(), "handler");
-        webView.setWebViewClient(new MyWebViewClient());
+
+        WebInit();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -107,6 +86,23 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+    }
+
+    public void WebInit(){
+        /**
+         * Created by Thinkwee on 2016/10/8 0008 21:23
+         * Parameter []
+         * Return void
+         * CLASS:MainActivity
+         * FILE:MainActivity.java
+         * TODO:网络环境初始化
+         */
+
+        webView = (WebView)findViewById(R.id.web);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.addJavascriptInterface(new JavascriptHandler(), "handler");
+        webView.setWebViewClient(new MyWebViewClient());
         webView.loadUrl("http://jwxt.bupt.edu.cn/zxqDtKxJas.jsp");
         TimerTask task= new TimerTask() {
             @Override
@@ -186,56 +182,69 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (WrongNet==1){
-            if (id == R.id.jiao1||id ==R.id.jiao2||id == R.id.jiao3||id ==R.id.jiao4||id == R.id.tushuguan) {
+            if (id == R.id.jiaoshi) {
               showAlertDialog();
-            }else if (id == R.id.developer_opensource) {
+            }
+            else if (id == R.id.developer_opensource) {
                 this.setTitle("作者及开源信息");
-                tv.setText(R.string.devoloper_openresource_string);
-                webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom/tree/master/app");
-                webViewgit.setVisibility(View.VISIBLE);
-
+                AboutFragment aboutfragment= new AboutFragment();
+                manager = this.getFragmentManager();
+                transaction = manager.beginTransaction();
+                transaction.replace(R.id.frame, aboutfragment);
             }
             else if (id == R.id.version) {
-
                 this.setTitle("版本说明");
-                tv.setText(R.string.version );
-                webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom/blob/master/README.md");
-                webViewgit.setVisibility(View.VISIBLE);
+                VersionFragment versionfragment= new VersionFragment();
+                manager = this.getFragmentManager();
+                transaction = manager.beginTransaction();
+                transaction.replace(R.id.frame, versionfragment);
+                transaction.commit();
+            }
+            else if (id == R.id.homepage) {
+                this.setTitle("主页");
+                HomePageFragment homepagefragment= new HomePageFragment();
+                manager = this.getFragmentManager();
+                transaction = manager.beginTransaction();
+                transaction.replace(R.id.frame, homepagefragment);
+                transaction.commit();
             }
         }else{
-            EmptyRoom emptyroom=new EmptyRoom();
-            if (id == R.id.jiao1) {
-                webViewgit.setVisibility(View.INVISIBLE);
-                tv.setText(emptyroom.get_show_content("教一楼",htmlbody));
-                this.setTitle("教一楼空闲教室");
-            } else if (id == R.id.jiao2) {
-                webViewgit.setVisibility(View.INVISIBLE);
-                tv.setText(emptyroom.get_show_content("教二楼",htmlbody));
-                this.setTitle("教二楼空闲教室");
-            } else if (id == R.id.jiao3) {
-                webViewgit.setVisibility(View.INVISIBLE);
-                tv.setText(emptyroom.get_show_content("教三楼",htmlbody));
-                this.setTitle("教三楼空闲教室");
-            } else if (id == R.id.jiao4) {
-                webViewgit.setVisibility(View.INVISIBLE);
-                tv.setText(emptyroom.get_show_content("教四楼",htmlbody));
-                this.setTitle("教四楼空闲教室");
-            }else if (id==R.id.tushuguan){
-                webViewgit.setVisibility(View.INVISIBLE);
-                tv.setText(emptyroom.get_show_content("图书馆",htmlbody));
-                this.setTitle("图书馆空闲教室");
-            } else if (id == R.id.developer_opensource) {
+            if (id == R.id.jiaoshi) {
+                this.setTitle("教室查询");
+                buildingfragment= new BuildingFragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("htmlbody",htmlbody);
+                buildingfragment.setArguments(bundle);
+                buildingfragment.Init();;
+                manager = this.getFragmentManager();
+                transaction = manager.beginTransaction();
+                transaction.replace(R.id.frame, buildingfragment);
+                transaction.commit();
+            }
+            else if (id == R.id.developer_opensource) {
                 this.setTitle("作者及开源信息");
-                tv.setText(R.string.devoloper_openresource_string);
-                webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom/tree/master/app");
-                webViewgit.setVisibility(View.VISIBLE);
-
-
-            }else if (id == R.id.version) {
+                AboutFragment aboutfragment= new AboutFragment();
+                manager = this.getFragmentManager();
+                transaction = manager.beginTransaction();
+                transaction.replace(R.id.frame, aboutfragment);
+                transaction.commit();
+            }
+            else if (id == R.id.version) {
                 this.setTitle("版本说明");
-                tv.setText(R.string.version );
-                webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom/blob/master/README.md");
-                webViewgit.setVisibility(View.VISIBLE);
+                VersionFragment versionfragment= new VersionFragment();
+                manager = this.getFragmentManager();
+                transaction = manager.beginTransaction();
+                transaction.replace(R.id.frame, versionfragment);
+                transaction.commit();
+
+            }
+            else if (id == R.id.homepage) {
+                this.setTitle("主页");
+                HomePageFragment homepagefragment= new HomePageFragment();
+                manager = this.getFragmentManager();
+                transaction = manager.beginTransaction();
+                transaction.replace(R.id.frame, homepagefragment);
+                transaction.commit();
             }
         }
 
@@ -243,8 +252,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 
 
     final class MyWebViewClient extends WebViewClient {
@@ -342,9 +349,6 @@ public class MainActivity extends AppCompatActivity
         builder.setNegativeButton("我知道了", null);
         builder.show();
     }
-
-
-
 
 
 }

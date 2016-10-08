@@ -5,10 +5,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="devoloper_openresource_string">"作者：Thinkwee|Sworduo\nEmail:thinkwee2767@gmail.com\n版本:V1.1.4\n\n本项目开源，Github地址\ngithub.com/thinkwee/BuptRoom.git\n"</string>
+    <string name="devoloper_openresource_string">"作者：Thinkwee|Sworduo\nEmail:thinkwee2767@gmail.com\n版本:V1.2.0\n\n本项目开源，Github地址\ngithub.com/thinkwee/BuptRoom.git\n"</string>
 
 
 
-    <string name="version">"版本号:V1.1.4\n\n\n1. 优化代码结构整理架构\n2. 为2.0版本大更新做准备\n3. 增加在线GitHub查看\n"</string>
+    <string name="version">"版本号:V1.2.0\n\n\n1. 全新教室查询界面\n2. 优化代码\n"</string>
+    <string name="homepage">"欢迎使用北邮自习室查询系统\n左侧边缘向右滑拉出菜单\n左右滑动切换教学楼\n请务必在北邮校园网环境下使用此软件\n在弹出教室信息拉取完成的提示后进行操作"</string>
 
 </resources>

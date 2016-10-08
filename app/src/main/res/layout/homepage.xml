@@ -13,8 +13,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="thinkwee.buptroom.MainActivity"
     android:layout_centerHorizontal="true"
-    android:visibility="invisible"
-   >
+    android:visibility="visible"
+    >
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -26,26 +26,14 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:shadowRadius="3.0"
             android:textStyle="bold"
-            android:text="Just a test of Content_Main"
+            android:text="@string/homepage"
             android:id="@+id/show_content"/>
     </ScrollView>
 
-    <WebView
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:visibility="invisible"
-        android:id="@+id/web">
-    </WebView>
 
-    <WebView
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:scrollbars="none"
-        android:id="@+id/webgit">
-    </WebView>
+
 
 </LinearLayout>
