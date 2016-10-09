@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="thinkwee.buptroom.SettingActivity"
+    android:theme="@style/AppTheme.NoActionBar"
+>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_setting"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        >
+    </android.support.v7.widget.Toolbar>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:id="@+id/listview_setting"
+        android:clickable="true"
+        android:footerDividersEnabled="true"
+        android:focusable="true"
+        android:elevation="0dp"
+        android:listSelector="@color/colorPrimaryDarkBlack">
+
+
+    </ListView>
+
+</android.support.design.widget.CoordinatorLayout>

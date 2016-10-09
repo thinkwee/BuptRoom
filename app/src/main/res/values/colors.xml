@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#A4A4A4</color>
-    <color name="TextColor">#D8D8D8</color>
+    <color name="colorPrimary">#2D658A</color>
+    <color name="colorPrimaryDark">#2D658A</color>
+    <color name="colorAccent">#FFFFFF</color>
+    <color name="TextBackGroundColor">#55D8D8D8</color>
+
+    <color name="ripple">#A4A4A4</color>
+    <color name="ripple_white">#FFFFFF</color>
+
+    <color name="colorPrimaryHotPink">#FF69B4</color>
+    <color name="colorPrimaryDarkHotPink">#FF1493</color>
+    <color name="colorAccentHotPink">#A4A4A4</color>
+
+    <color name="colorPrimaryBlack">#000000</color>
+    <color name="colorPrimaryDarkBlack">#000000</color>
+    <color name="colorAccentBlack">#A4A4A4</color>
 </resources>

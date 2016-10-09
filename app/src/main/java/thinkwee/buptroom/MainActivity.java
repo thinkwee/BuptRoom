@@ -25,6 +25,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         this.setTitle("主页");
         HomePageFragment homepagefragment= new HomePageFragment();
         manager = this.getFragmentManager();
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
     }
 
@@ -208,6 +212,11 @@ public class MainActivity extends AppCompatActivity
                 transaction.replace(R.id.frame, homepagefragment);
                 transaction.commit();
             }
+            else if (id==R.id.theme_choose){
+                Intent intent= new Intent();
+                intent.setClassName(this,"thinkwee.buptroom.SettingActivity");
+                startActivity(intent);
+            }
         }else{
             if (id == R.id.jiaoshi) {
                 this.setTitle("教室查询");
@@ -245,6 +254,11 @@ public class MainActivity extends AppCompatActivity
                 transaction = manager.beginTransaction();
                 transaction.replace(R.id.frame, homepagefragment);
                 transaction.commit();
+            }
+            else if (id==R.id.theme_choose){
+                Intent intent= new Intent();
+                intent.setClassName(this,"thinkwee.buptroom.SettingActivity");
+                startActivity(intent);
             }
         }
 

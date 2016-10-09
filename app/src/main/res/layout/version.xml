@@ -14,6 +14,7 @@
     tools:context="thinkwee.buptroom.MainActivity"
     android:layout_centerHorizontal="true"
     android:visibility="visible"
+    android:background="@drawable/wallpaper_4"
     >
 
     <ScrollView
@@ -29,6 +30,7 @@
             android:textSize="18sp"
             android:shadowRadius="3.0"
             android:textStyle="bold"
+            android:textColor="@color/colorAccent"
             android:text="Just a test of Version"
             android:id="@+id/show_content"/>
     </ScrollView>

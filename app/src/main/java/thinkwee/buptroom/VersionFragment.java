@@ -41,7 +41,7 @@ public class VersionFragment extends Fragment {
                 return true;
             }
         });
-        webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom/blob/master/README.md");
+        webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom/wiki/INTRODUCTION");
         webViewgit.setVisibility(View.VISIBLE);
 
         return v;

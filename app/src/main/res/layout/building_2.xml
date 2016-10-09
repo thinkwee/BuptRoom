@@ -25,6 +25,7 @@
             android:shadowRadius="3.0"
             android:textStyle="bold"
             android:text="jiao2"
+            android:textColor="@color/colorAccent"
             android:id="@+id/show_content"/>
     </ScrollView>
 

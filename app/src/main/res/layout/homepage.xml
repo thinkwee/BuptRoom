@@ -12,27 +12,61 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="thinkwee.buptroom.MainActivity"
-    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
     android:visibility="visible"
-    >
+    android:background="@drawable/wallpaper_4">
 
-    <ScrollView
+    <Button
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:scrollbars="none">
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:textSize="16sp"
-            android:shadowRadius="3.0"
-            android:textStyle="bold"
-            android:text="@string/homepage"
-            android:id="@+id/show_content"/>
-    </ScrollView>
+        android:clickable="true"
+        android:layout_height="85dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:background="@color/TextBackGroundColor"
+        android:textColor="@color/colorAccent"
+        android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+        android:layout_marginTop="15dp"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:clickable="true"
+        android:layout_height="85dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:shadowRadius="3.0"
+        android:textStyle="bold"
+        android:background="@color/TextBackGroundColor"
+        android:textColor="@color/colorAccent"
+        android:text="2\n当您看到拉取信息提示完成时\n点开左侧菜单\n选择空闲教室查询"
+        android:layout_marginTop="15dp"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:clickable="true"
+        android:layout_height="85dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:shadowRadius="3.0"
+        android:textStyle="bold"
+        android:background="@color/TextBackGroundColor"
+        android:textColor="@color/colorAccent"
+        android:text="3\n左右滑动即可切换教学楼\n请务必在校园网环境下使用本软件"
+        android:layout_marginTop="15dp"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:clickable="true"
+        android:layout_height="85dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:shadowRadius="3.0"
+        android:textStyle="bold"
+        android:background="@color/TextBackGroundColor"
+        android:textColor="@color/colorAccent"
+        android:text="4\n去吧学霸~"
 
+        android:layout_marginTop="15dp"/>
 
 
 

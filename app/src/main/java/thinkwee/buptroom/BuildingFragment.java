@@ -53,7 +53,7 @@ public  class BuildingFragment extends Fragment {
          view3 = inflater.inflate(R.layout.building_3, container, false);
          view4 = inflater.inflate(R.layout.building_4, container, false);
          view5 = inflater.inflate(R.layout.building_library, container, false);
-        tv=(TextView)view1.findViewById(R.id.show_content_1);
+        tv=(TextView)view1.findViewById(R.id.show_content);
         tv.setText(emptyroom.get_show_content("教一楼",htmlbody));
         tv=(TextView)view2.findViewById(R.id.show_content);
         tv.setText(emptyroom.get_show_content("教二楼",htmlbody));
@@ -124,7 +124,7 @@ public  class BuildingFragment extends Fragment {
         public CharSequence getPageTitle(int position){
             SpannableStringBuilder ssb = new SpannableStringBuilder(titles.get(position));
             ssb.setSpan(new RelativeSizeSpan(1.4f), 0, ssb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(132,132,132));
+            ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(242,242,242));
             ssb.setSpan(fcs, 0, ssb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             return ssb;
         }
