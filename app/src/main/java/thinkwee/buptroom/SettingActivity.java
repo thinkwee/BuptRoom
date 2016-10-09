@@ -43,16 +43,18 @@ public class SettingActivity extends AppCompatActivity {
         SettingActivity.this.setTheme(R.style.AppTheme_NoActionBar);
 
         //添加toolbar返回
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_setting);
-        toolbar.setTitle("2333");
-        toolbar.setSubtitle("23333333");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_setting);
+        toolbar.setTitle("主题设置");
+        toolbar.setSubtitle("暂未实现");
 
-        toolbar.setNavigationIcon(R.drawable.ic_menu_back);//或者在布局中 app:navigationIcon="?attr/homeAsUpIndicator"
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.ic_ab_back_holo_light_am);//或者在布局中 app:navigationIcon="?attr/homeAsUpIndicator"
         toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 finish();
             }
-        });*/
+        });
 
         settinglist=(ListView)findViewById(R.id.listview_setting);
         mData=getData();

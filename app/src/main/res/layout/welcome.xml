@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/welcome"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:clickable="true"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="45sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:text="BuptRoom"
+        android:id="@+id/welcome_title"
+        android:layout_marginTop="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:clickable="true"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:text="version"
+            android:id="@+id/version_number"
+            android:layout_marginTop="15dp"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

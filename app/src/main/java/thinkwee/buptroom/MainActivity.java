@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
 
-        this.setTitle("主页");
+        this.setTitle("首页");
         HomePageFragment homepagefragment= new HomePageFragment();
         manager = this.getFragmentManager();
         transaction = manager.beginTransaction();
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity
                 transaction.commit();
             }
             else if (id == R.id.homepage) {
-                this.setTitle("主页");
+                this.setTitle("首页");
                 HomePageFragment homepagefragment= new HomePageFragment();
                 manager = this.getFragmentManager();
                 transaction = manager.beginTransaction();
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity
 
             }
             else if (id == R.id.homepage) {
-                this.setTitle("主页");
+                this.setTitle("首页");
                 HomePageFragment homepagefragment= new HomePageFragment();
                 manager = this.getFragmentManager();
                 transaction = manager.beginTransaction();
