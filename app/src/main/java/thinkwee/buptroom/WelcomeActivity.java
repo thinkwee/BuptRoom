@@ -8,6 +8,9 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -22,17 +25,28 @@ public class WelcomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
-
         PackageManager pm = getPackageManager();
         try {
             PackageInfo pi = pm.getPackageInfo("thinkwee.buptroom", 0);
-            TextView versionNumber = (TextView) findViewById(R.id.version_number);
-            versionNumber.setText("v1.2.1");
+
+            ImageView img=(ImageView)findViewById(R.id.welcomeimg);
+            Animation animation= AnimationUtils.loadAnimation(this,R.anim.enlarge);
+            animation.setFillAfter(true);
+            img.startAnimation(animation);
+
+
+
+
             AssetManager mgr=getAssets();//得到AssetManager
-            Typeface tf=Typeface.createFromAsset(mgr, "fonts/Gabriola.ttf");//根据路径得到Typeface
+
+            Typeface tf=Typeface.createFromAsset(mgr, "fonts/Roboto-Italic.ttf");//根据路径得到Typeface
+            TextView chickensoup=(TextView)findViewById(R.id.chicken_soup);
+            chickensoup.setTypeface(tf);//设置字体
+
+            tf=Typeface.createFromAsset(mgr, "fonts/Roboto-MediumItalic.ttf");
             TextView Title = (TextView) findViewById(R.id.welcome_title);
             Title.setTypeface(tf);//设置字体
-            versionNumber.setTypeface(tf);
+
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -46,6 +60,6 @@ public class WelcomeActivity extends Activity {
                 WelcomeActivity.this.finish();
             }
 
-        }, 1200);
+        }, 2500);
     }
 }

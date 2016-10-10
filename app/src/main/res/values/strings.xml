@@ -5,10 +5,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="devoloper_openresource_string">"作者：Thinkwee|Sworduo\nEmail:thinkwee2767@gmail.com\n版本:V1.2.1\n\n本项目开源，Github地址\ngithub.com/thinkwee/BuptRoom.git\n"</string>
+    <string name="devoloper_openresource_string">"作者：Thinkwee|Sworduo\nEmail:thinkwee2767@gmail.com\n版本:V1.2.2\n\n本项目开源，Github地址\ngithub.com/thinkwee/BuptRoom.git\n"</string>
 
 
 
-    <string name="version">"版本号:V1.2.1\n\n\n1. 全新背景\n2. 主题选择菜单占位\n"</string>
+    <string name="version">"版本号:V1.2.2\n\n\n1. 全新开场动画\n2. 教室界面卡片化\n"</string>
 
 </resources>

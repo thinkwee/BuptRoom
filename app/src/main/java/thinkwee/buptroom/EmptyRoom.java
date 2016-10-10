@@ -30,7 +30,7 @@ public class EmptyRoom {
     public EmptyRoom() {
     }
 
-    public String get_show_content(String keyword, String htmlbody){
+    public ArrayList<String> get_show_content(String keyword, String htmlbody){
         /**
          * Created by Thinkwee on 2016/9/29 0029 17:54
          * Parameter [keyword, htmlbody] 楼名，网页拉取到的html_body内容
@@ -41,6 +41,7 @@ public class EmptyRoom {
          */
 
         String htmlbodytemp=htmlbody;
+        ArrayList<String> result= new ArrayList<String>();
         htmlbody="";
         String[] contentstemp=htmlbodytemp.split(",");
         for (String temp:contentstemp){
@@ -93,10 +94,13 @@ public class EmptyRoom {
             }
             count++;
         }
-
-        return "————————第1|2节————————\n"+settlecontent(j12)+"\n\n"+"————————第3|4节————————\n"+settlecontent(j34)+"\n\n"+
-                "————————第5|6节————————\n"+settlecontent(j56)+"\n\n"+"————————第7|8节————————\n"+settlecontent(j78)+"\n\n"+
-                "—————————第9节—————————\n"+settlecontent(j9)+"\n\n"+"————————第10|11节————————\n"+settlecontent(j1011)+"\n\n\n\n\n\n\n\n\n已经到底了！！";
+        result.add("第1|2节\n"+settlecontent(j12));
+        result.add("第3|4节\n"+settlecontent(j34));
+        result.add("第5|6节\n"+settlecontent(j56));
+        result.add("第7|8节\n"+settlecontent(j78));
+        result.add("第9节\n"+settlecontent(j9));
+        result.add("第10|11节\n"+settlecontent(j1011));
+        return result;
     }
 
 

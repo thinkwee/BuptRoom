@@ -3,6 +3,7 @@ package thinkwee.buptroom;
 import android.app.Notification;
 import android.app.NotificationManager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 
 import android.support.design.widget.Snackbar;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -163,7 +165,24 @@ public class MainActivity extends AppCompatActivity
 
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            new AlertDialog.Builder(this).setTitle("确认退出吗？")
+                    .setIcon(R.mipmap.launcher)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // 点击“确认”后的操作
+                            MainActivity.this.finish();
+
+                        }
+                    })
+                    .setNegativeButton("返回", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // 点击“返回”后的操作,这里不设置没有任何操作
+                        }
+                    }).show();
         }
     }
 
@@ -363,6 +382,8 @@ public class MainActivity extends AppCompatActivity
         builder.setNegativeButton("我知道了", null);
         builder.show();
     }
+
+
 
 
 }

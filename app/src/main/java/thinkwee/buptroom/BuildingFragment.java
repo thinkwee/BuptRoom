@@ -29,6 +29,8 @@ import java.util.List;
  * TODO:教室查询界面
  */
 
+
+
 public  class BuildingFragment extends Fragment {
     @Nullable
     private View v;
@@ -41,19 +43,43 @@ public  class BuildingFragment extends Fragment {
 
 
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_building, container, false);
-         viewpager = (ViewPager) v.findViewById(R.id.viewpager);
-         strip=(PagerTabStrip)v.findViewById(R.id.pager_title);
-         strip.setDrawFullUnderline(false);
-         strip.setTextSpacing(5);
-         strip.setTabIndicatorColorResource(R.color.colorPrimary);
-         view1 = inflater.inflate(R.layout.building_1, container, false);
-         view2 = inflater.inflate(R.layout.building_2, container, false);
-         view3 = inflater.inflate(R.layout.building_3, container, false);
-         view4 = inflater.inflate(R.layout.building_4, container, false);
-         view5 = inflater.inflate(R.layout.building_library, container, false);
-        tv=(TextView)view1.findViewById(R.id.show_content);
+        viewpager = (ViewPager) v.findViewById(R.id.viewpager);
+        strip=(PagerTabStrip)v.findViewById(R.id.pager_title);
+        strip.setDrawFullUnderline(false);
+        strip.setTextSpacing(5);
+        strip.setTabIndicatorColorResource(R.color.colorPrimary);
+
+
+        view1 = inflater.inflate(R.layout.building_1, container, false);
+        view1.setScrollContainer(true);
+        SetPage(view1,"教二楼");
+
+        view2 = inflater.inflate(R.layout.building_2, container, false);
+        view2.setScrollContainer(true);
+        SetPage(view2,"教二楼");
+
+        view3 = inflater.inflate(R.layout.building_3, container, false);
+        view3.setScrollContainer(true);
+        SetPage(view3,"教三楼");
+
+        view4 = inflater.inflate(R.layout.building_4, container, false);
+        view4.setScrollContainer(true);
+        SetPage(view4,"教四楼");
+
+        view5 = inflater.inflate(R.layout.building_library, container, false);
+        view5.setScrollContainer(true);
+        SetPage(view5,"图书馆");
+
+
+
+
+
+
+
+        /*tv=(TextView)view1.findViewById(R.id.show_content);
         tv.setText(emptyroom.get_show_content("教一楼",htmlbody));
         tv=(TextView)view2.findViewById(R.id.show_content);
         tv.setText(emptyroom.get_show_content("教二楼",htmlbody));
@@ -62,7 +88,7 @@ public  class BuildingFragment extends Fragment {
         tv=(TextView)view4.findViewById(R.id.show_content);
         tv.setText(emptyroom.get_show_content("教四楼",htmlbody));
         tv=(TextView)view5.findViewById(R.id.show_content);
-        tv.setText(emptyroom.get_show_content("图书馆",htmlbody));
+        tv.setText(emptyroom.get_show_content("图书馆",htmlbody));*/
 
 
         ArrayList<View> views = new ArrayList<View>();
@@ -129,5 +155,27 @@ public  class BuildingFragment extends Fragment {
             return ssb;
         }
     }
+
+    public void SetPage(View view,String buildingname){
+        TextView t12,t34,t56,t78,t9,t1011;
+        ArrayList<String> tempclass=new ArrayList<String>();
+        tempclass.clear();
+        tempclass=emptyroom.get_show_content(buildingname,htmlbody);
+        t12=(TextView)view.findViewById(R.id.jie12);
+        t12.setText(tempclass.get(0));
+        t34=(TextView)view.findViewById(R.id.jie34);
+        t34.setText(tempclass.get(1));
+        t56=(TextView)view.findViewById(R.id.jie56);
+        t56.setText(tempclass.get(2));
+        t78=(TextView)view.findViewById(R.id.jie78);
+        t78.setText(tempclass.get(3));
+        t9=(TextView)view.findViewById(R.id.jie9);
+        t9.setText(tempclass.get(4));
+        t1011=(TextView)view.findViewById(R.id.jie1011);
+        t1011.setText(tempclass.get(5));
+
+
+    }
+
 
 }

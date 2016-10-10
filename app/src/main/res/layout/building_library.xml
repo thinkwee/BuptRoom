@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -7,28 +7,103 @@
 
 
 
-
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_gravity="center_horizontal"
         android:scrollbars="none"
         android:layout_marginTop="15dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp">
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:textSize="18sp"
-            android:shadowRadius="3.0"
-            android:textStyle="bold"
-            android:text="jiao4"
-            android:textColor="@color/colorAccent"
-            android:id="@+id/show_content"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/jie12"
+                android:layout_width="fill_parent"
+                android:minHeight="85dp"
+                android:clickable="true"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@color/TextBackGroundColor"
+                android:textColor="@color/colorAccent"
+                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+                android:layout_marginTop="15dp"/>
+            <TextView
+                android:id="@+id/jie34"
+                android:layout_width="fill_parent"
+                android:clickable="true"
+                android:minHeight="85dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@color/TextBackGroundColor"
+                android:textColor="@color/colorAccent"
+                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+                android:layout_marginTop="15dp"/>
+            <TextView
+                android:id="@+id/jie56"
+                android:layout_width="fill_parent"
+                android:clickable="true"
+                android:minHeight="85dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@color/TextBackGroundColor"
+                android:textColor="@color/colorAccent"
+                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+                android:layout_marginTop="15dp"/>
+            <TextView
+                android:id="@+id/jie78"
+                android:layout_width="fill_parent"
+                android:clickable="true"
+                android:minHeight="85dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@color/TextBackGroundColor"
+                android:textColor="@color/colorAccent"
+                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+                android:layout_marginTop="15dp"/>
+            <TextView
+                android:id="@+id/jie9"
+                android:layout_width="fill_parent"
+                android:clickable="true"
+                android:minHeight="85dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@color/TextBackGroundColor"
+                android:textColor="@color/colorAccent"
+                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+                android:layout_marginTop="15dp"/>
+            <TextView
+                android:id="@+id/jie1011"
+                android:layout_width="fill_parent"
+                android:clickable="true"
+                android:minHeight="85dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@color/TextBackGroundColor"
+                android:textColor="@color/colorAccent"
+                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+                android:layout_marginTop="15dp"/>
+
+        </LinearLayout>
+
+
     </ScrollView>
 
 
-
-</LinearLayout>
+</ScrollView>

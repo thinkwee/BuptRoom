@@ -1,43 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/welcome"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <TextView
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:id="@+id/welcomeimg"
+        android:src="@drawable/welcome2"/>
+
+    <Button
         android:layout_width="fill_parent"
         android:clickable="true"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="45sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
+        android:background="@color/TextBackGroundColorWelcome"
         android:textColor="@color/colorAccent"
-        android:text="BuptRoom"
+        android:text="\n  “We're here to put a dent in the universe”  \n"
+        android:id="@+id/chicken_soup"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:clickable="true"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:textSize="25sp"
+        android:background="@color/TextBackGroundColorWelcome"
+        android:textColor="@color/colorAccent"
+        android:text="  BuptRoom"
         android:id="@+id/welcome_title"
-        android:layout_marginTop="15dp"/>
+        android:layout_above="@+id/chicken_soup"
+        android:layout_toRightOf="@+id/welcome_icon"
+         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        >
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:clickable="true"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorAccent"
-            android:text="version"
-            android:id="@+id/version_number"
-            android:layout_marginTop="15dp"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/welcome_icon"
+        android:background="@color/TextBackGroundColorWelcome"
+        android:src="@mipmap/launcher"
+        android:layout_above="@+id/chicken_soup"
+        android:layout_alignParentStart="true" />
 
 
-    </LinearLayout>
-
-
-
-</LinearLayout>
+</RelativeLayout>

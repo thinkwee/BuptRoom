@@ -49,7 +49,7 @@ public class SettingActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        toolbar.setNavigationIcon(R.drawable.ic_ab_back_holo_light_am);//或者在布局中 app:navigationIcon="?attr/homeAsUpIndicator"
+        toolbar.setNavigationIcon(R.drawable.ic_menu_back);//或者在布局中 app:navigationIcon="?attr/homeAsUpIndicator"
         toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 finish();
