@@ -7,6 +7,11 @@
     android:fitsSystemWindows="true"
     tools:context="thinkwee.buptroom.MainActivity">
 
+    <!--NavigationView主要内容布局
+    指定了主题
+    设计了Toolbar即最上方一条，Toolbar的最右边即菜单
+    之后接一个FrameLayout即一个帧布局，无意义，用来被替换成各个具体的页面(Fragment)-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

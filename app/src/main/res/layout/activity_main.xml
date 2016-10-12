@@ -8,6 +8,12 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <!--主界面
+    include里包括了app_bar_main这个layout
+    再加上一个NavigationView即带左边抽屉视图的一个View
+    在NavigationView里指定了左边抽屉的上半部分用layout里的nav_header_main
+    右上角的菜单指定了menu里的activity_main_drawer-->
+
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"

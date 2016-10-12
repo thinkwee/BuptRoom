@@ -27,12 +27,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -136,6 +138,15 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        /**
+         * Created by Thinkwee on 2016/10/12 0012 9:58
+         * Parameter [item]
+         * Return boolean
+         * CLASS:MainActivity
+         * FILE:MainActivity.java
+         * TODO:右上角菜单处理
+         */
+
         if (id == R.id.bug_deliver) {
             String[] email = {"thinkwee2767@gmail.com"}; // 需要注意，email必须以数组形式传入
             Intent intent = new Intent(Intent.ACTION_SEND);
@@ -160,6 +171,15 @@ public class MainActivity extends AppCompatActivity
 
         @Override
     public void onBackPressed() {
+            /**
+             * Created by Thinkwee on 2016/10/12 0012 9:58
+             * Parameter []
+             * Return void
+             * CLASS:MainActivity
+             * FILE:MainActivity.java
+             * TODO:对实体后退键处理，分抽屉打开和关上两种情况
+             */
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
 
@@ -199,74 +219,60 @@ public class MainActivity extends AppCompatActivity
          * Return boolean
          * CLASS:MainActivity
          * FILE:MainActivity.java
-         * TODO:侧边栏点击事件
+         * TODO:侧边栏点击事件 分Wrongnet即网络连接正确或错误
          */
 
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (WrongNet==1){
             if (id == R.id.jiaoshi) {
-              showAlertDialog();
-            }
-            else if (id == R.id.developer_opensource) {
-                this.setTitle("作者及开源信息");
-                AboutFragment aboutfragment= new AboutFragment();
-                manager = this.getFragmentManager();
-                transaction = manager.beginTransaction();
-                transaction.replace(R.id.frame, aboutfragment);
-            }
-            else if (id == R.id.version) {
-                this.setTitle("版本说明");
-                VersionFragment versionfragment= new VersionFragment();
-                manager = this.getFragmentManager();
-                transaction = manager.beginTransaction();
-                transaction.replace(R.id.frame, versionfragment);
-                transaction.commit();
-            }
-            else if (id == R.id.homepage) {
-                this.setTitle("首页");
-                HomePageFragment homepagefragment= new HomePageFragment();
-                manager = this.getFragmentManager();
-                transaction = manager.beginTransaction();
-                transaction.replace(R.id.frame, homepagefragment);
-                transaction.commit();
-            }
-            else if (id==R.id.theme_choose){
-                Intent intent= new Intent();
-                intent.setClassName(this,"thinkwee.buptroom.SettingActivity");
-                startActivity(intent);
-            }
-        }else{
-            if (id == R.id.jiaoshi) {
-                this.setTitle("教室查询");
-                buildingfragment= new BuildingFragment();
-                Bundle bundle=new Bundle();
-                bundle.putString("htmlbody",htmlbody);
-                buildingfragment.setArguments(bundle);
-                buildingfragment.Init();;
-                manager = this.getFragmentManager();
-                transaction = manager.beginTransaction();
-                transaction.replace(R.id.frame, buildingfragment);
-                transaction.commit();
-            }
-            else if (id == R.id.developer_opensource) {
-                this.setTitle("作者及开源信息");
-                AboutFragment aboutfragment= new AboutFragment();
-                manager = this.getFragmentManager();
-                transaction = manager.beginTransaction();
-                transaction.replace(R.id.frame, aboutfragment);
-                transaction.commit();
-            }
-            else if (id == R.id.version) {
-                this.setTitle("版本说明");
-                VersionFragment versionfragment= new VersionFragment();
-                manager = this.getFragmentManager();
-                transaction = manager.beginTransaction();
-                transaction.replace(R.id.frame, versionfragment);
-                transaction.commit();
+                if (WrongNet==1){
+                    showAlertDialog();
+                    Intent intent = new Intent();
+                    intent.setClass(this, ShakeService.class);
+                    stopService(intent);
+                }
 
+                else{
+                    Intent intent = new Intent();
+                    intent.setClass(this, ShakeService.class);
+                    stopService(intent);
+                    this.setTitle("教室查询");
+                    buildingfragment= new BuildingFragment();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("htmlbody",htmlbody);
+                    buildingfragment.setArguments(bundle);
+                    buildingfragment.Init();;
+                    manager = this.getFragmentManager();
+                    transaction = manager.beginTransaction();
+                    transaction.replace(R.id.frame, buildingfragment);
+                    transaction.commit();
+                }
+            }
+            else if (id == R.id.developer_opensource) {
+                Intent intent = new Intent();
+                intent.setClass(this, ShakeService.class);
+                stopService(intent);
+                this.setTitle("作者及开源信息");
+                AboutFragment aboutfragment= new AboutFragment();
+                manager = this.getFragmentManager();
+                transaction = manager.beginTransaction();
+                transaction.replace(R.id.frame, aboutfragment);
+            }
+            else if (id == R.id.version) {
+                Intent intent = new Intent();
+                intent.setClass(this, ShakeService.class);
+                stopService(intent);
+                this.setTitle("版本说明");
+                VersionFragment versionfragment= new VersionFragment();
+                manager = this.getFragmentManager();
+                transaction = manager.beginTransaction();
+                transaction.replace(R.id.frame, versionfragment);
+                transaction.commit();
             }
             else if (id == R.id.homepage) {
+                Intent intent = new Intent();
+                intent.setClass(this, ShakeService.class);
+                stopService(intent);
                 this.setTitle("首页");
                 HomePageFragment homepagefragment= new HomePageFragment();
                 manager = this.getFragmentManager();
@@ -279,7 +285,17 @@ public class MainActivity extends AppCompatActivity
                 intent.setClassName(this,"thinkwee.buptroom.SettingActivity");
                 startActivity(intent);
             }
-        }
+            else  if (id==R.id.shake){
+                this.setTitle("摇一摇");
+                Intent intent = new Intent();
+                intent.setClass(this, ShakeService.class);
+                startService(intent);
+                ShakeFragment shakefragment=new ShakeFragment();
+                manager = this.getFragmentManager();
+                transaction = manager.beginTransaction();
+                transaction.replace(R.id.frame, shakefragment);
+                transaction.commit();
+            }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -320,7 +336,7 @@ public class MainActivity extends AppCompatActivity
          * Return
          * CLASS:JavascriptHandler
          * FILE:MainActivity.java
-         * TODO:HANDLER
+         * TODO:HANDLER，用于接受Webview执行javascrpit语句后得到的返回值
          */
 
         @JavascriptInterface
@@ -344,7 +360,7 @@ public class MainActivity extends AppCompatActivity
          * Return void
          * CLASS:MainActivity
          * FILE:MainActivity.java
-         * TODO:NOTIFICATION
+         * TODO:网络信息拉取完成的通知消息
          */
 
         String MainText=null;

@@ -52,7 +52,7 @@ public  class BuildingFragment extends Fragment {
         strip.setTextSpacing(5);
         strip.setTabIndicatorColorResource(R.color.colorPrimary);
 
-
+       //把各个layout转成view,加入ViewPager中
         view1 = inflater.inflate(R.layout.building_1, container, false);
         view1.setScrollContainer(true);
         SetPage(view1,"教二楼");
@@ -73,30 +73,14 @@ public  class BuildingFragment extends Fragment {
         view5.setScrollContainer(true);
         SetPage(view5,"图书馆");
 
-
-
-
-
-
-
-        /*tv=(TextView)view1.findViewById(R.id.show_content);
-        tv.setText(emptyroom.get_show_content("教一楼",htmlbody));
-        tv=(TextView)view2.findViewById(R.id.show_content);
-        tv.setText(emptyroom.get_show_content("教二楼",htmlbody));
-        tv=(TextView)view3.findViewById(R.id.show_content);
-        tv.setText(emptyroom.get_show_content("教三楼",htmlbody));
-        tv=(TextView)view4.findViewById(R.id.show_content);
-        tv.setText(emptyroom.get_show_content("教四楼",htmlbody));
-        tv=(TextView)view5.findViewById(R.id.show_content);
-        tv.setText(emptyroom.get_show_content("图书馆",htmlbody));*/
-
-
         ArrayList<View> views = new ArrayList<View>();
         views.add(view1);
         views.add(view2);
         views.add(view3);
         views.add(view4);
         views.add(view5);
+
+        //加标题
         ArrayList<String> titles= new ArrayList<String>();
         titles.add("教一楼空闲教室");
         titles.add("教二空闲教室");
@@ -141,12 +125,14 @@ public  class BuildingFragment extends Fragment {
             return views.get(position);
         }
 
+        //设置view和标题
         public MYViewPagerAdapter(ArrayList<View> views,ArrayList<String> titles){
             this.views=views;
             this.titles=titles;
         }
 
         @Override
+        //设置标题字体和颜色
         public CharSequence getPageTitle(int position){
             SpannableStringBuilder ssb = new SpannableStringBuilder(titles.get(position));
             ssb.setSpan(new RelativeSizeSpan(1.4f), 0, ssb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -157,6 +143,15 @@ public  class BuildingFragment extends Fragment {
     }
 
     public void SetPage(View view,String buildingname){
+        /**
+         * Created by Thinkwee on 2016/10/12 0012 9:56
+         * Parameter [view, buildingname]要显示文字的view,显示内容所属的楼名
+         * Return void
+         * CLASS:BuildingFragment
+         * FILE:BuildingFragment.java
+         * TODO:给每个楼的view(layout)添加内容，直接调用封装好的EmptyRoom
+         */
+
         TextView t12,t34,t56,t78,t9,t1011;
         ArrayList<String> tempclass=new ArrayList<String>();
         tempclass.clear();

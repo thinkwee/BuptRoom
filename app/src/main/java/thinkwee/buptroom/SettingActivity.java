@@ -28,7 +28,7 @@ import android.widget.Toast;
  * Created by think on 20162016/10/9 00098:48
  * PACKAGE:thinkwee.buptroom
  * PROJECT:BuptRoom
- * TODO:
+ * TODO:设置界面处理
  */
 
 public class SettingActivity extends AppCompatActivity {
@@ -49,13 +49,15 @@ public class SettingActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        toolbar.setNavigationIcon(R.drawable.ic_menu_back);//或者在布局中 app:navigationIcon="?attr/homeAsUpIndicator"
+        toolbar.setNavigationIcon(R.drawable.ic_menu_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 finish();
             }
         });
 
+
+       //设置ListView
         settinglist=(ListView)findViewById(R.id.listview_setting);
         mData=getData();
         MyAdapter adapter= new MyAdapter(this);
@@ -65,6 +67,15 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private List<Map<String,Object>> getData(){
+        /**
+         * Created by Thinkwee on 2016/10/12 0012 10:01
+         * Parameter []
+         * Return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+         * CLASS:SettingActivity
+         * FILE:SettingActivity.java
+         * TODO:绑定每一栏的各个组件
+         */
+
         List<Map<String,Object>> list= new ArrayList<Map<String,Object>>();
         Map<String,Object> map= new HashMap<String, Object>();
         map.put("colorpreview",R.drawable.blue);
@@ -91,6 +102,15 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public class MyAdapter extends BaseAdapter{
+        /**
+         * Created by Thinkwee on 2016/10/12 0012 10:02
+         * Parameter
+         * Return
+         * CLASS:MyAdapter
+         * FILE:SettingActivity.java
+         * TODO:Listview的adapter，用于对每一栏进行设置，包括点击事件
+         */
+
         private LayoutInflater inflater;
 
         public MyAdapter(Context context){

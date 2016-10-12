@@ -17,7 +17,7 @@ import android.widget.TextView;
  * Created by think on 20162016/10/9 000920:57
  * PACKAGE:thinkwee.buptroom
  * PROJECT:BuptRoom
- * TODO:
+ * TODO:欢迎界面，在Manifest中设置此Activity为启动Activity,设置为全屏，设置为一段时间后跳转到主Activity
  */
 
 public class WelcomeActivity extends Activity {

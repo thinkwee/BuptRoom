@@ -17,6 +17,10 @@
     android:background="@drawable/wallpaper_4"
     >
 
+    <!--版本界面
+    一个TextView加一个Webview,Webview用于显示github上的wiki界面，即版本更新记录
+    -->
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

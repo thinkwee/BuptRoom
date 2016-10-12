@@ -9,6 +9,9 @@
     tools:context="thinkwee.buptroom.SettingActivity"
 >
 
+
+    <!--设置菜单，典型的ListView,配合SettingActivity查看-->
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_setting"
         android:layout_width="match_parent"

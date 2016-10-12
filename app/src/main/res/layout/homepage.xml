@@ -16,6 +16,9 @@
     android:visibility="visible"
     android:background="@drawable/wallpaper_4">
 
+
+    <!--主页界面，这几个按钮实际上是TextVIew-->
+
     <Button
         android:layout_width="fill_parent"
         android:clickable="true"

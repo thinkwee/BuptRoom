@@ -4,7 +4,11 @@
     android:layout_height="match_parent"
     >
 
-
+   <!-- 教一楼空闲教室显示界面，
+   其余几楼完全相同，
+   一个滚动布局里嵌套一个线性布局，
+   再将线性布局中加入六个TextView显示各节课的空闲教室
+   之所以加线性布局而不是直接往滚动布局中加6个TextView是因为滚动布局中只能嵌套一个View-->
 
 
     <ScrollView
@@ -32,7 +36,6 @@
                 android:textStyle="bold"
                 android:background="@color/TextBackGroundColor"
                 android:textColor="@color/colorAccent"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
                 android:layout_marginTop="15dp"/>
             <TextView
                 android:id="@+id/jie34"
@@ -45,7 +48,6 @@
                 android:textStyle="bold"
                 android:background="@color/TextBackGroundColor"
                 android:textColor="@color/colorAccent"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
                 android:layout_marginTop="15dp"/>
             <TextView
                 android:id="@+id/jie56"
@@ -58,7 +60,6 @@
                 android:textStyle="bold"
                 android:background="@color/TextBackGroundColor"
                 android:textColor="@color/colorAccent"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
                 android:layout_marginTop="15dp"/>
             <TextView
                 android:id="@+id/jie78"
@@ -71,7 +72,6 @@
                 android:textStyle="bold"
                 android:background="@color/TextBackGroundColor"
                 android:textColor="@color/colorAccent"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
                 android:layout_marginTop="15dp"/>
             <TextView
                 android:id="@+id/jie9"
@@ -84,7 +84,6 @@
                 android:textStyle="bold"
                 android:background="@color/TextBackGroundColor"
                 android:textColor="@color/colorAccent"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
                 android:layout_marginTop="15dp"/>
             <TextView
                 android:id="@+id/jie1011"
@@ -97,7 +96,6 @@
                 android:textStyle="bold"
                 android:background="@color/TextBackGroundColor"
                 android:textColor="@color/colorAccent"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
                 android:layout_marginTop="15dp"/>
 
         </LinearLayout>
