@@ -34,7 +34,6 @@ import java.util.List;
 public  class BuildingFragment extends Fragment {
     @Nullable
     private View v;
-    private TextView tv;
     private EmptyRoom emptyroom=new EmptyRoom();
     private PagerTabStrip strip;
     String htmlbody;
@@ -97,11 +96,9 @@ public  class BuildingFragment extends Fragment {
         htmlbody=getArguments().getString("htmlbody");
     }
 
-
     public class MYViewPagerAdapter extends PagerAdapter {
         private ArrayList<View> views;
         private ArrayList<String> titles;
-
 
         @Override
         public int getCount() {
@@ -142,7 +139,7 @@ public  class BuildingFragment extends Fragment {
         }
     }
 
-    public void SetPage(View view,String buildingname){
+    public void SetPage(View view,String buildingname) {
         /**
          * Created by Thinkwee on 2016/10/12 0012 9:56
          * Parameter [view, buildingname]要显示文字的view,显示内容所属的楼名
@@ -152,25 +149,21 @@ public  class BuildingFragment extends Fragment {
          * TODO:给每个楼的view(layout)添加内容，直接调用封装好的EmptyRoom
          */
 
-        TextView t12,t34,t56,t78,t9,t1011;
-        ArrayList<String> tempclass=new ArrayList<String>();
+        TextView t12, t34, t56, t78, t9, t1011;
+        ArrayList<String> tempclass = new ArrayList<String>();
         tempclass.clear();
-        tempclass=emptyroom.get_show_content(buildingname,htmlbody);
-        t12=(TextView)view.findViewById(R.id.jie12);
+        tempclass = emptyroom.get_show_content(buildingname, htmlbody);
+        t12 = (TextView) view.findViewById(R.id.jie12);
         t12.setText(tempclass.get(0));
-        t34=(TextView)view.findViewById(R.id.jie34);
+        t34 = (TextView) view.findViewById(R.id.jie34);
         t34.setText(tempclass.get(1));
-        t56=(TextView)view.findViewById(R.id.jie56);
+        t56 = (TextView) view.findViewById(R.id.jie56);
         t56.setText(tempclass.get(2));
-        t78=(TextView)view.findViewById(R.id.jie78);
+        t78 = (TextView) view.findViewById(R.id.jie78);
         t78.setText(tempclass.get(3));
-        t9=(TextView)view.findViewById(R.id.jie9);
+        t9 = (TextView) view.findViewById(R.id.jie9);
         t9.setText(tempclass.get(4));
-        t1011=(TextView)view.findViewById(R.id.jie1011);
+        t1011 = (TextView) view.findViewById(R.id.jie1011);
         t1011.setText(tempclass.get(5));
-
-
     }
-
-
 }

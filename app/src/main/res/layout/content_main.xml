@@ -45,12 +45,11 @@
         android:id="@+id/web">
     </WebView>
 
-    <WebView
-        android:layout_width="fill_parent"
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:scrollbars="none"
-        android:id="@+id/webgit">
-    </WebView>
+        android:id="@+id/snackbar_temp"
+        android:visibility="invisible"/>
+
 
 </LinearLayout>

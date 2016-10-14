@@ -1,54 +1,38 @@
 package thinkwee.buptroom;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import android.os.Bundle;
-
 import android.support.design.widget.Snackbar;
-
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageButton;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
 
-
-import org.jsoup.Jsoup;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private WebView webView;
-    private TextView tv;
-    private org.jsoup.nodes.Document document;
     private String htmlbody=null;
     private String[] interesting={" ヾ(o◕∀◕)ﾉ新的一周新的开始!",
                                     " π__π默默学习不说话",
@@ -57,21 +41,23 @@ public class MainActivity extends AppCompatActivity
                                     " ( ￣ ▽￣)o╭╯明天就是周末了！",
                                     " o(*≧▽≦)ツ周六浪起来~",
                                     " (╭￣3￣)╭♡ 忘记明天是周一吧"};
-    private int HaveNetFlag=0;
+
     private int WrongNet=1;
     private FragmentManager manager;
     private FragmentTransaction transaction;
     private BuildingFragment buildingfragment;
+    private Button snackbartemp;
+    private ImageButton ProfileBt;
+    public static final String TAG = "MainActivity";
+    private int startcounts=0;
 
-
-    /**
-     * @param savedInstanceState
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Intent intent=getIntent();
+        htmlbody=intent.getStringExtra("HtmlBody");
+        WrongNet=intent.getIntExtra("WrongNet",0);
 
         this.setTitle("首页");
         HomePageFragment homepagefragment= new HomePageFragment();
@@ -80,48 +66,85 @@ public class MainActivity extends AppCompatActivity
         transaction.replace(R.id.frame, homepagefragment);
         transaction.commit();
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        snackbartemp=(Button)findViewById(R.id.snackbar_temp);
 
-        WebInit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headview=navigationView.inflateHeaderView(R.layout.nav_header_main);
+        ProfileBt=(ImageButton)headview.findViewById(R.id.profile);
+
+        ProfileBt.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent();
+                intent.putExtra("StartCounts",startcounts);
+                intent.setClassName(MainActivity.this,"thinkwee.buptroom.ProfileActivity");
+                startActivity(intent);
+            }
+        });
+
+        AppStartCounts(MainActivity.this);
+
+
 
 
     }
 
-    public void WebInit(){
+    public void AppStartCounts(Context context){
         /**
-         * Created by Thinkwee on 2016/10/8 0008 21:23
-         * Parameter []
+         * Created by Thinkwee on 2016/10/13 0013 11:12
+         * Parameter [context]上下文
          * Return void
          * CLASS:MainActivity
          * FILE:MainActivity.java
-         * TODO:网络环境初始化
+         * TODO:统计软件启动次数 startcounts传到个人统计页面
          */
-
-        webView = (WebView)findViewById(R.id.web);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.addJavascriptInterface(new JavascriptHandler(), "handler");
-        webView.setWebViewClient(new MyWebViewClient());
-        webView.loadUrl("http://jwxt.bupt.edu.cn/zxqDtKxJas.jsp");
-        TimerTask task= new TimerTask() {
-            @Override
-            public void run() {
-                if (HaveNetFlag==0) Notification_show("网络错误，请确保在校园网环境下使用本软件");
+        try {
+            File file=new File(context.getCacheDir(),"StartCounts.txt");
+            if (file.exists()){
+                FileInputStream fis=new FileInputStream(file);
+                BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+                String temp=br.readLine();
+                if (temp==null){
+                    startcounts=1;
+                    Log.i(TAG,"文件读错误");
+                }
+                else{
+                    startcounts=Integer.parseInt(temp);
+                    Log.i(TAG,"第"+temp+"次创建");
+                }
+                fis.close();
+                br.close();
+                FileOutputStream fos=new FileOutputStream(file);
+                startcounts++;
+                fos.write(Integer.toString(startcounts).getBytes());
+                fos.close();
+            }else{
+                file.createNewFile();
+                FileOutputStream fos=new FileOutputStream(file);
+                FileInputStream fis=new FileInputStream(file);
+                BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+                Log.i(TAG,"首次创建");
+                fos.write(Integer.toString(startcounts).getBytes());
+                fos.close();
+                Log.i(TAG,br.readLine());
+                br.close();
+                fis.close();
             }
-        };
-        Timer timer=new Timer();
-        timer.schedule(task,3000);
-    }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,16 +183,13 @@ public class MainActivity extends AppCompatActivity
         if(id==R.id.timeinfo){
             final TimeInfo timeinfo= new TimeInfo();
             timeinfo.timesetting();
-            Snackbar.make(webView, "今天是"+timeinfo.Timestring+" "+timeinfo.nowtime+"\n"+interesting[timeinfo.daycount], Snackbar.LENGTH_LONG)
+            Snackbar.make(snackbartemp, "今天是"+timeinfo.Timestring+" "+timeinfo.nowtime+"\n"+interesting[timeinfo.daycount], Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
         return super.onOptionsItemSelected(item);
     }
 
-
-
-
-        @Override
+    @Override
     public void onBackPressed() {
             /**
              * Created by Thinkwee on 2016/10/12 0012 9:58
@@ -192,6 +212,11 @@ public class MainActivity extends AppCompatActivity
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // 点击“确认”后的操作
+                            if (isServiceWork(MainActivity.this,"thinkwee.buptroom.ShakeService")) {
+                                Intent stopintent=new Intent(MainActivity.this,ShakeService.class);
+                                Log.i(TAG,"The ShakeService has been closed");
+                                stopService(stopintent);
+                            }
                             MainActivity.this.finish();
 
                         }
@@ -205,10 +230,6 @@ public class MainActivity extends AppCompatActivity
                     }).show();
         }
     }
-
-
-
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -227,15 +248,12 @@ public class MainActivity extends AppCompatActivity
             if (id == R.id.jiaoshi) {
                 if (WrongNet==1){
                     showAlertDialog();
-                    Intent intent = new Intent();
-                    intent.setClass(this, ShakeService.class);
-                    stopService(intent);
                 }
-
                 else{
-                    Intent intent = new Intent();
-                    intent.setClass(this, ShakeService.class);
-                    stopService(intent);
+                    if (isServiceWork(MainActivity.this,"thinkwee.buptroom.ShakeService")==true) {
+                        Intent stopintent=new Intent(this,ShakeService.class);
+                        stopService(stopintent);
+                    }
                     this.setTitle("教室查询");
                     buildingfragment= new BuildingFragment();
                     Bundle bundle=new Bundle();
@@ -249,9 +267,10 @@ public class MainActivity extends AppCompatActivity
                 }
             }
             else if (id == R.id.developer_opensource) {
-                Intent intent = new Intent();
-                intent.setClass(this, ShakeService.class);
-                stopService(intent);
+                if (isServiceWork(MainActivity.this,"thinkwee.buptroom.ShakeService")==true) {
+                    Intent stopintent=new Intent(this,ShakeService.class);
+                    stopService(stopintent);
+                }
                 this.setTitle("作者及开源信息");
                 AboutFragment aboutfragment= new AboutFragment();
                 manager = this.getFragmentManager();
@@ -259,9 +278,10 @@ public class MainActivity extends AppCompatActivity
                 transaction.replace(R.id.frame, aboutfragment);
             }
             else if (id == R.id.version) {
-                Intent intent = new Intent();
-                intent.setClass(this, ShakeService.class);
-                stopService(intent);
+                if (isServiceWork(MainActivity.this,"thinkwee.buptroom.ShakeService")==true) {
+                    Intent stopintent=new Intent(this,ShakeService.class);
+                    stopService(stopintent);
+                }
                 this.setTitle("版本说明");
                 VersionFragment versionfragment= new VersionFragment();
                 manager = this.getFragmentManager();
@@ -270,9 +290,10 @@ public class MainActivity extends AppCompatActivity
                 transaction.commit();
             }
             else if (id == R.id.homepage) {
-                Intent intent = new Intent();
-                intent.setClass(this, ShakeService.class);
-                stopService(intent);
+                if (isServiceWork(MainActivity.this,"thinkwee.buptroom.ShakeService")==true) {
+                    Intent stopintent=new Intent(this,ShakeService.class);
+                    stopService(stopintent);
+                }
                 this.setTitle("首页");
                 HomePageFragment homepagefragment= new HomePageFragment();
                 manager = this.getFragmentManager();
@@ -281,6 +302,10 @@ public class MainActivity extends AppCompatActivity
                 transaction.commit();
             }
             else if (id==R.id.theme_choose){
+                if (isServiceWork(MainActivity.this,"thinkwee.buptroom.ShakeService")==true) {
+                    Intent stopintent=new Intent(this,ShakeService.class);
+                    stopService(stopintent);
+                }
                 Intent intent= new Intent();
                 intent.setClassName(this,"thinkwee.buptroom.SettingActivity");
                 startActivity(intent);
@@ -302,86 +327,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
-    final class MyWebViewClient extends WebViewClient {
-        /**
-         * Created by Thinkwee on 2016/9/28 0028 9:27
-         * Parameter
-         * Return
-         * CLASS:MyWebViewClient
-         * FILE:MainActivity.java
-         * TODO:获取网页内容
-         */
-
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
-        }
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            Log.d("WebView","onPageStarted");
-            super.onPageStarted(view, url, favicon);
-        }
-        public void onPageFinished(WebView view, String url) {
-            Log.d("WebView","onPageFinished ");
-            view.loadUrl("javascript:window.handler.getContent(document.body.innerHTML);");
-            super.onPageFinished(view, url);
-        }
-    }
-
-
-    final  class JavascriptHandler{
-        /**
-         * Created by Thinkwee on 2016/9/28 0028 9:27
-         * Parameter
-         * Return
-         * CLASS:JavascriptHandler
-         * FILE:MainActivity.java
-         * TODO:HANDLER，用于接受Webview执行javascrpit语句后得到的返回值
-         */
-
-        @JavascriptInterface
-        public void getContent(String htmlContent){
-            //Log.i(Tag,"html content: "+htmlContent);
-            document= Jsoup.parse(htmlContent);
-            htmlbody=document.getElementsByTag("body").text();
-            HaveNetFlag=1;
-            if (htmlbody.contains("楼"))   {Notification_show("教室信息拉取完成，可以查看空闲教室");WrongNet=0;}
-             else Notification_show("没有网络，请确保在校园网环境下使用本软件");
-
-
-        }
-    }
-
-
-    public void Notification_show(String Notification_content){
-        /**
-         * Created by Thinkwee on 2016/9/28 0028 9:26
-         * Parameter [Notification_content] 显示的正文
-         * Return void
-         * CLASS:MainActivity
-         * FILE:MainActivity.java
-         * TODO:网络信息拉取完成的通知消息
-         */
-
-        String MainText=null;
-        Notification.Builder mBuilder = new Notification.Builder(this);
-        Bitmap LB=BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
-        mBuilder.setContentTitle("BuptRoom")                        //标题
-                .setContentText(Notification_content)             //内容
-                .setSubText("滑动取消此消息")                    //内容下面的一小段文字
-                .setTicker("BuptRoom提醒")                      //收到信息后状态栏显示的文字信息
-                .setWhen(System.currentTimeMillis())              //设置通知时间
-                .setSmallIcon(R.mipmap.ic_launcher)             //设置小图标
-                .setLargeIcon(LB)                     //设置大图标
-                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)    //设置默认的三色灯与振动器
-                .setAutoCancel(true)                           //设置点击后取消Notification
-                .setOngoing(false);                        //设置正在进行
-        NotificationManager mNManager;
-        mNManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        mNManager.notify(1, mBuilder.build());
-
-    }
-
     private void showAlertDialog() {
         /**
          * Created by Thinkwee on 2016/9/28 0028 9:29
@@ -399,7 +344,38 @@ public class MainActivity extends AppCompatActivity
         builder.show();
     }
 
+    public boolean isServiceWork(Context mContext, String serviceName) {
+        /**
+         * Created by Thinkwee on 2016/10/12 0012 19:30
+         * Parameter [mContext, serviceName]
+         * Return boolean
+         * CLASS:MainActivity
+         * FILE:MainActivity.java
+         * TODO:/**
+         * 判断某个服务是否正在运行的方法
+         *
+         * @param mContext
+         * @param serviceName
+         *            是包名+服务的类名（例如：net.loonggg.testbackstage.TestService）
+         * @return true代表正在运行，false代表服务没有正在运行
+         */
 
+        boolean isWork = false;
+        ActivityManager myAM = (ActivityManager) mContext
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> myList = myAM.getRunningServices(100);
+        if (myList.size() <= 0) {
+            return false;
+        }
+        for (int i = 0; i < myList.size(); i++) {
+            String mName = myList.get(i).service.getClassName().toString();
+            if (mName.equals(serviceName)) {
+                isWork = true;
+                break;
+            }
+        }
+        return isWork;
+    }
 
 
 }

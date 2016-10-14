@@ -91,7 +91,5 @@ public class TimeInfo {
             daycount=5;
         }
         Timestring=mYear + "年" + mMonth + "月" + mDay+"日"+"星期"+mWay;
-
-
     }
 }

@@ -2,16 +2,17 @@ package thinkwee.buptroom;
 
 import android.app.Service;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Binder;
 import android.os.IBinder;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
  * Created by think on 20162016/10/11 001120:58
@@ -23,7 +24,8 @@ import android.widget.Toast;
 public class ShakeService extends Service {
     public static final String TAG = "ShakeService";
     private SensorManager mSensorManager;
-    public int flag=0;
+    public boolean flag=false;
+    private ShakeBinder shakebinder= new ShakeBinder();
 
     @Override
     public void onCreate() {
@@ -36,6 +38,7 @@ public class ShakeService extends Service {
     @Override
     public void onDestroy() {
         // TODO Auto-generated method stub
+        flag=false;
         super.onDestroy();
         mSensorManager.unregisterListener(mShakeListener);
     }
@@ -59,7 +62,7 @@ public class ShakeService extends Service {
     }
 
     private final SensorEventListener mShakeListener = new SensorEventListener() {
-        private static final float SENSITIVITY = 16;
+        private static final float SENSITIVITY = 10;
         private static final int BUFFER = 5;
         private float[] gravity = new float[3];
         private float average = 0;
@@ -87,7 +90,7 @@ public class ShakeService extends Service {
                 Log.i(TAG, "average:"+average);
                 Log.i(TAG, "average / BUFFER:"+(average / BUFFER));
                 if (average / BUFFER >= SENSITIVITY) {
-                    handleShakeAction();
+                    handleShakeAction();//如果达到阈值则处理摇一摇响应
                 }
                 average = 0;
                 fill = 0;
@@ -97,16 +100,20 @@ public class ShakeService extends Service {
 
     protected void handleShakeAction() {
         // TODO Auto-generated method stub
-        Toast.makeText(getApplicationContext(), "摇个蛋蛋", Toast.LENGTH_SHORT).show();
-        flag=1;
-    }
-    public  int getflag(){
-        return flag;
+        flag=true;
+        Toast.makeText(getApplicationContext(), "摇一摇成功", Toast.LENGTH_SHORT).show();
+        Intent intent= new Intent();
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        intent.setClassName(this,"thinkwee.buptroom.ShakeTestActivity");
+        startActivity(intent);
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         // TODO Auto-generated method stub
-        return null;
+        return shakebinder;
+    }
+    class ShakeBinder extends Binder{
+
     }
 }

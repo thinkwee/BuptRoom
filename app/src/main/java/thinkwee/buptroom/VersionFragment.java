@@ -28,8 +28,6 @@ public class VersionFragment extends Fragment {
         v = inflater.inflate(R.layout.version, container, false);
         tv=(TextView)v.findViewById(R.id.show_content);
         webViewgit=(WebView)v.findViewById(R.id.webgit);
-
-
         webViewgit.setVisibility(View.INVISIBLE);
         tv.setText(R.string.version );
         webViewgit = (WebView)v.findViewById(R.id.webgit);
@@ -43,7 +41,6 @@ public class VersionFragment extends Fragment {
         });
         webViewgit.loadUrl("https://github.com/thinkwee/BuptRoom/wiki/INTRODUCTION");
         webViewgit.setVisibility(View.VISIBLE);
-
         return v;
     }
 }

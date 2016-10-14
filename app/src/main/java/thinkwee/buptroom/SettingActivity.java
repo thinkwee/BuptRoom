@@ -40,15 +40,12 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
         this.setTitle("主题选择");
-        SettingActivity.this.setTheme(R.style.AppTheme_NoActionBar);
 
         //添加toolbar返回
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_setting);
         toolbar.setTitle("主题设置");
         toolbar.setSubtitle("暂未实现");
-
         setSupportActionBar(toolbar);
-
         toolbar.setNavigationIcon(R.drawable.ic_menu_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
@@ -56,14 +53,11 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-
        //设置ListView
         settinglist=(ListView)findViewById(R.id.listview_setting);
         mData=getData();
         MyAdapter adapter= new MyAdapter(this);
         settinglist.setAdapter(adapter);
-
-
     }
 
     private List<Map<String,Object>> getData(){
@@ -143,10 +137,8 @@ public class SettingActivity extends AppCompatActivity {
             }else{
                 holder=(ViewHolder)view.getTag();
             }
-
             holder.img.setBackgroundResource((Integer)mData.get(pos).get("colorpreview"));
             holder.text.setText((String)mData.get(pos).get("colortext"));
-
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                         public void onClick(View v){
@@ -154,7 +146,6 @@ public class SettingActivity extends AppCompatActivity {
 
                 }
             });
-
             return view;
         }
     }

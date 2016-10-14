@@ -1,7 +1,5 @@
 package thinkwee.buptroom;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -48,7 +46,6 @@ public class EmptyRoom {
             htmlbody=htmlbody+temp;
         }
         RawRoomInfo=htmlbody.split(" |:");
-        String showcontent="";
         count=0;
         tsgflag=0;
         cishu=0;
