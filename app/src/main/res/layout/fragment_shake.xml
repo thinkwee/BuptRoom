@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/wallpaper_4"
@@ -13,18 +13,14 @@
         android:src="@drawable/doge"
         android:layout_gravity="center"
         android:id="@+id/shakeimg"
-
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_x="110dp"
-        android:layout_y="169dp" />
+ />
 
     <TextView
         android:text="摇摇手机试试"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_x="137dp"
-        android:layout_y="79dp"
         android:id="@+id/textView2"
         android:clickable="true"
         android:minHeight="85dp"
@@ -36,4 +32,4 @@
         android:layout_marginTop="15dp"/>
 
 
-</AbsoluteLayout>
+</LinearLayout>

@@ -33,7 +33,7 @@ public class ShakeTestActivity extends AppCompatActivity {
 
         //添加toolbar返回
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_setting);
-        toolbar.setTitle("摇一摇");
+        toolbar.setTitle("摇一摇(恶搞测试)");
         toolbar.setSubtitle("你摇出来的结果是");
 
         setSupportActionBar(toolbar);

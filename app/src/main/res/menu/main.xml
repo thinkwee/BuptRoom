@@ -7,8 +7,13 @@
         android:title="时间助手"
         app:showAsAction="never" />
     <item
-        android:id="@+id/bug_deliver"
+        android:id="@+id/feedback"
         android:orderInCategory="100"
-        android:title="错误报告"
+        android:title="反馈"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/download"
+        android:orderInCategory="100"
+        android:title="离线下载"
         app:showAsAction="never" />
 </menu>

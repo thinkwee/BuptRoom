@@ -21,9 +21,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -91,12 +94,45 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
         AppStartCounts(MainActivity.this);
+        if (WrongNet==1){
+            try {
+                if (htmlbody==null)
+                    if(CheckDownloadHtml(MainActivity.this))
+                        Snackbar.make(snackbartemp, "已从离线内容中加载", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
 
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
+    public boolean CheckDownloadHtml(Context context) throws IOException {
+        /**
+         * Created by Thinkwee on 2016/10/15 0015 11:42
+         * Parameter [context] 上下文
+         * Return boolean
+         * CLASS:MainActivity
+         * FILE:MainActivity.java
+         * TODO:检查离线内容，若有今天离线则从离线文件中更新htmlbody
+         */
 
-
+        File file=new File(context.getCacheDir(),"DownloadHtml.txt");
+        FileInputStream fis=new FileInputStream(file);
+        BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+        String temp=br.readLine();
+        final TimeInfo timeinfo= new TimeInfo();
+        timeinfo.timesetting();
+        htmlbody="";
+        if (temp.equals(timeinfo.Timestring)) {
+            Log.i(TAG, "从离线文件中获取内容");
+            Log.i(TAG,"读取离线测试"+temp+"\n");
+            WrongNet=0;
+            htmlbody=br.readLine();
+            return true;
+        }else
+            return false;
     }
 
     public void AppStartCounts(Context context){
@@ -116,11 +152,11 @@ public class MainActivity extends AppCompatActivity
                 String temp=br.readLine();
                 if (temp==null){
                     startcounts=1;
-                    Log.i(TAG,"文件读错误");
+                    Log.i(TAG,"Startcounts文件读错误");
                 }
                 else{
                     startcounts=Integer.parseInt(temp);
-                    Log.i(TAG,"第"+temp+"次创建");
+                    Log.i(TAG,"第"+temp+"次启动软件");
                 }
                 fis.close();
                 br.close();
@@ -131,19 +167,39 @@ public class MainActivity extends AppCompatActivity
             }else{
                 file.createNewFile();
                 FileOutputStream fos=new FileOutputStream(file);
-                FileInputStream fis=new FileInputStream(file);
-                BufferedReader br=new BufferedReader(new InputStreamReader(fis));
-                Log.i(TAG,"首次创建");
+                Log.i(TAG,"首次创建Startcounts");
                 fos.write(Integer.toString(startcounts).getBytes());
                 fos.close();
-                Log.i(TAG,br.readLine());
-                br.close();
-                fis.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void DownloadHtml(Context context){
+        /**
+         * Created by Thinkwee on 2016/10/13 0013 11:12
+         * Parameter [context]上下文
+         * Return void
+         * CLASS:MainActivity
+         * FILE:MainActivity.java
+         * TODO:离线下载html
+         */
+        try {
+            File file=new File(context.getCacheDir(),"DownloadHtml.txt");
+            if (!file.exists()){
+                file.delete();
+            }
+            file.createNewFile();
+            FileOutputStream fos=new FileOutputStream(file,false);
+            final TimeInfo timeinfo= new TimeInfo();
+            timeinfo.timesetting();
+            fos.write((timeinfo.Timestring+"\n").getBytes());
+            fos.write((htmlbody.toString()).getBytes());
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -159,7 +215,6 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         /**
          * Created by Thinkwee on 2016/10/12 0012 9:58
@@ -169,13 +224,12 @@ public class MainActivity extends AppCompatActivity
          * FILE:MainActivity.java
          * TODO:右上角菜单处理
          */
-
-        if (id == R.id.bug_deliver) {
+        if (id == R.id.feedback) {
             String[] email = {"thinkwee2767@gmail.com"}; // 需要注意，email必须以数组形式传入
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("message/rfc822"); // 设置邮件格式
             intent.putExtra(Intent.EXTRA_EMAIL, email); // 接收人
-            intent.putExtra(Intent.EXTRA_SUBJECT, "BuptRoom错误报告"); // 主题
+            intent.putExtra(Intent.EXTRA_SUBJECT, "BuptRoom反馈"); // 主题
             intent.putExtra(Intent.EXTRA_TEXT, "Hi~ o(*￣▽￣*)ブ我在使用BuptRoom时遇到了以下问题，请尽快解决:\n"); // 正文
             startActivity(Intent.createChooser(intent, "请选择邮件类应用以发送错误报告"));
             return true;
@@ -185,6 +239,19 @@ public class MainActivity extends AppCompatActivity
             timeinfo.timesetting();
             Snackbar.make(snackbartemp, "今天是"+timeinfo.Timestring+" "+timeinfo.nowtime+"\n"+interesting[timeinfo.daycount], Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+        }else
+        if (id==R.id.download){
+            if (WrongNet==1){
+                Log.i(TAG,"离线下载错误");
+                Snackbar.make(snackbartemp, "离线下载错误", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+            else{
+                DownloadHtml(MainActivity.this);
+                Log.i(TAG,"已离线或离线成功");
+                Snackbar.make(snackbartemp, "已离线或离线成功", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -276,6 +343,7 @@ public class MainActivity extends AppCompatActivity
                 manager = this.getFragmentManager();
                 transaction = manager.beginTransaction();
                 transaction.replace(R.id.frame, aboutfragment);
+                transaction.commit();
             }
             else if (id == R.id.version) {
                 if (isServiceWork(MainActivity.this,"thinkwee.buptroom.ShakeService")==true) {
@@ -376,6 +444,5 @@ public class MainActivity extends AppCompatActivity
         }
         return isWork;
     }
-
 
 }
