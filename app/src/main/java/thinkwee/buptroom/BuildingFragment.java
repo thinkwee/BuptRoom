@@ -54,7 +54,7 @@ public  class BuildingFragment extends Fragment {
        //把各个layout转成view,加入ViewPager中
         view1 = inflater.inflate(R.layout.building_1, container, false);
         view1.setScrollContainer(true);
-        SetPage(view1,"教二楼");
+        SetPage(view1,"教一楼");
 
         view2 = inflater.inflate(R.layout.building_2, container, false);
         view2.setScrollContainer(true);

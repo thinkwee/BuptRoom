@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -25,6 +26,11 @@ import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,7 +55,6 @@ public class WelcomeActivity extends Activity {
         webView = (WebView)findViewById(R.id.GetHtml);
         PackageManager pm = getPackageManager();
         try {
-            PackageInfo pi = pm.getPackageInfo("thinkwee.buptroom", 0);
             WebInit();
             ImageView img=(ImageView)findViewById(R.id.welcomeimg);
             Animation animation= AnimationUtils.loadAnimation(this,R.anim.enlarge);
@@ -62,8 +67,8 @@ public class WelcomeActivity extends Activity {
             tf=Typeface.createFromAsset(mgr, "fonts/Roboto-MediumItalic.ttf");
             TextView Title = (TextView) findViewById(R.id.welcome_title);
             Title.setTypeface(tf);//设置字体
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
 
         new Handler().postDelayed(new Runnable(){
@@ -73,7 +78,6 @@ public class WelcomeActivity extends Activity {
                 Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
                 intent.putExtra("WrongNet",WrongNet);
                 intent.putExtra("HtmlBody",htmlbody);
-
                 startActivity(intent);
                 WelcomeActivity.this.finish();
 
@@ -99,7 +103,7 @@ public class WelcomeActivity extends Activity {
         TimerTask task= new TimerTask() {
             @Override
             public void run() {
-                if (HaveNetFlag==0) Notification_show("网络错误，请确保在校园网环境下使用本软件");
+                if (HaveNetFlag==0) Notification_show("无网络或非校园网,请重启或者离线");
             }
         };
         Timer timer=new Timer();
@@ -147,9 +151,7 @@ public class WelcomeActivity extends Activity {
             htmlbody=document.getElementsByTag("body").text();
             HaveNetFlag=1;
             if (htmlbody.contains("楼"))   {WrongNet=0;Notification_show("教室信息拉取完成，可以查看空闲教室");}
-            else Notification_show("没有网络，请确保在校园网环境下使用本软件");
-
-
+            else Notification_show("无网络或非校园网，请重启或离线");
         }
     }
 
@@ -171,7 +173,6 @@ public class WelcomeActivity extends Activity {
         PendingIntent resultPendingIntent = PendingIntent.getActivity(
                 WelcomeActivity.this, 0, resultIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
-
         mBuilder.setContentTitle("BuptRoom")                        //标题
                 .setContentText(Notification_content)             //内容
                 .setSubText("滑动取消此消息")                    //内容下面的一小段文字
@@ -183,12 +184,9 @@ public class WelcomeActivity extends Activity {
                 .setAutoCancel(true)                           //设置点击后取消Notification
                 .setOngoing(false)                        //设置正在进行
                 .setContentIntent(resultPendingIntent);
-
-
         NotificationManager mNManager;
         mNManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mNManager.notify(1, mBuilder.build());
-
     }
 
 }

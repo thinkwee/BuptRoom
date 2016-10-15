@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
                                     " o(*≧▽≦)ツ周六浪起来~",
                                     " (╭￣3￣)╭♡ 忘记明天是周一吧"};
 
-    private int WrongNet=1;
+    private int WrongNet=1;//网络状况标志位
     private FragmentManager manager;
     private FragmentTransaction transaction;
     private BuildingFragment buildingfragment;
@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity
          * FILE:MainActivity.java
          * TODO:检查离线内容，若有今天离线则从离线文件中更新htmlbody
          */
-
         File file=new File(context.getCacheDir(),"DownloadHtml.txt");
+        if(!file.exists()) return false;
         FileInputStream fis=new FileInputStream(file);
         BufferedReader br=new BufferedReader(new InputStreamReader(fis));
         String temp=br.readLine();
@@ -210,11 +210,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
         /**
          * Created by Thinkwee on 2016/10/12 0012 9:58
          * Parameter [item]
@@ -246,10 +242,21 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
             else{
-                DownloadHtml(MainActivity.this);
-                Log.i(TAG,"已离线或离线成功");
-                Snackbar.make(snackbartemp, "已离线或离线成功", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                try {
+                    if (CheckDownloadHtml(MainActivity.this)){
+                        Log.i(TAG,"离线成功");
+                        Snackbar.make(snackbartemp, "今日已经离线", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+                    else{
+                        DownloadHtml(MainActivity.this);
+                        Log.i(TAG,"离线成功");
+                        Snackbar.make(snackbartemp, "离线成功", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return super.onOptionsItemSelected(item);
@@ -265,7 +272,6 @@ public class MainActivity extends AppCompatActivity
              * FILE:MainActivity.java
              * TODO:对实体后退键处理，分抽屉打开和关上两种情况
              */
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
 
@@ -274,7 +280,6 @@ public class MainActivity extends AppCompatActivity
             new AlertDialog.Builder(this).setTitle("确认退出吗？")
                     .setIcon(R.mipmap.launcher)
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // 点击“确认”后的操作
@@ -284,11 +289,9 @@ public class MainActivity extends AppCompatActivity
                                 stopService(stopintent);
                             }
                             MainActivity.this.finish();
-
                         }
                     })
                     .setNegativeButton("返回", new DialogInterface.OnClickListener() {
-
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // 点击“返回”后的操作,这里不设置没有任何操作
@@ -380,6 +383,7 @@ public class MainActivity extends AppCompatActivity
             else  if (id==R.id.shake){
                 this.setTitle("摇一摇");
                 Intent intent = new Intent();
+                intent.putExtra("htmlbody",htmlbody);
                 intent.setClass(this, ShakeService.class);
                 startService(intent);
                 ShakeFragment shakefragment=new ShakeFragment();

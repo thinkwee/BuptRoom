@@ -11,11 +11,11 @@
                     android:title="首页" />
                 <item
                     android:id="@+id/jiaoshi"
-                    android:icon="@drawable/ic_menu_home"
+                    android:icon="@drawable/ic_menu_search_holo_light"
                     android:title="空闲教室查询" />
                 <item
                     android:id="@+id/shake"
-                    android:icon="@drawable/ic_menu_home"
+                    android:icon="@drawable/ic_menu_myplaces"
                     android:title="摇一摇" />
             </menu>
         </item>
@@ -27,11 +27,11 @@
                     android:title="选择主题" />
                 <item
                     android:id="@+id/developer_opensource"
-                    android:icon="@drawable/ic_menu_help"
+                    android:icon="@drawable/ic_menu_share"
                     android:title="作者及开源信息" />
                 <item
                     android:id="@+id/version"
-                    android:icon="@drawable/ic_menu_help"
+                    android:icon="@drawable/ic_menu_emoticons"
                     android:title="版本说明" />
             </menu>
         </item>
