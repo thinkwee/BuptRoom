@@ -97,11 +97,10 @@ public class MainActivity extends AppCompatActivity
         AppStartCounts(MainActivity.this);
         if (WrongNet==1){
             try {
-                if (htmlbody==null)
+                if (htmlbody==null||(htmlbody!=null&&!htmlbody.contains("楼")))
                     if(CheckDownloadHtml(MainActivity.this))
                         Snackbar.make(snackbartemp, "已从离线内容中加载", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
