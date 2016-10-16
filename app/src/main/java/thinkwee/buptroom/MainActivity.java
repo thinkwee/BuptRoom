@@ -36,7 +36,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String htmlbody=null;
+    private String htmlbody="";
     private String[] interesting={" ヾ(o◕∀◕)ﾉ新的一周新的开始!",
                                     " π__π默默学习不说话",
                                     " （╯－＿－）╯╧╧ 学海无涯苦作舟",
@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity
         String temp=br.readLine();
         final TimeInfo timeinfo= new TimeInfo();
         timeinfo.timesetting();
-        htmlbody="";
         if (temp.equals(timeinfo.Timestring)) {
             Log.i(TAG, "从离线文件中获取内容");
             Log.i(TAG,"读取离线测试"+temp+"\n");
@@ -195,6 +194,7 @@ public class MainActivity extends AppCompatActivity
             timeinfo.timesetting();
             fos.write((timeinfo.Timestring+"\n").getBytes());
             fos.write((htmlbody.toString()).getBytes());
+            Log.i(TAG,"已离线htmlbody"+htmlbody.toString());
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity
             else{
                 try {
                     if (CheckDownloadHtml(MainActivity.this)){
-                        Log.i(TAG,"离线成功");
+                        Log.i(TAG,"今日已经离线");
                         Snackbar.make(snackbartemp, "今日已经离线", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
