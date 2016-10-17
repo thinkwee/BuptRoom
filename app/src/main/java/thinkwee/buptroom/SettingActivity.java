@@ -46,7 +46,7 @@ public class SettingActivity extends AppCompatActivity {
         toolbar.setTitle("主题设置");
         toolbar.setSubtitle("暂未实现");
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_back);
+        toolbar.setNavigationIcon(R.drawable.arrow_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 finish();
@@ -142,7 +142,7 @@ public class SettingActivity extends AppCompatActivity {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                         public void onClick(View v){
-                    Toast.makeText(SettingActivity.this, "改个毛线", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingActivity.this, "没找到好壁纸，暂未实现", Toast.LENGTH_SHORT).show();
 
                 }
             });

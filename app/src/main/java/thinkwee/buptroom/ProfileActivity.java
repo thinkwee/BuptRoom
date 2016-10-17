@@ -29,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
         startcountsbt=(Button)findViewById(R.id.startcountsbt);
         startcountsbt.setText("使用次数\n"+String.valueOf(startcounts));
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_back);
+        toolbar.setNavigationIcon(R.drawable.arrow_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 finish();

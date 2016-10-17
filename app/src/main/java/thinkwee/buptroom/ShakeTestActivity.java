@@ -40,7 +40,7 @@ public class ShakeTestActivity extends AppCompatActivity {
         toolbar.setTitle("摇一摇");
         toolbar.setSubtitle("你摇出来的结果是");
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_back);
+        toolbar.setNavigationIcon(R.drawable.arrow_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 finish();
@@ -90,7 +90,7 @@ public class ShakeTestActivity extends AppCompatActivity {
         ArrayList<String> resultroom=new ArrayList<String>();
         int len=0;
         if (nowclass==6)
-            return "休息时间";
+            return "现在是休息时间";
         else{
             for (int i=0;i<5;i++) {
                 tempclass.clear();

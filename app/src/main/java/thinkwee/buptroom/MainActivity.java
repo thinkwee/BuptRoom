@@ -30,7 +30,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.util.List;
+
+import cn.hugeterry.updatefun.UpdateFunGO;
+import cn.hugeterry.updatefun.config.UpdateKey;
 
 
 public class MainActivity extends AppCompatActivity
@@ -105,6 +109,11 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
             }
         }
+
+        UpdateKey.API_TOKEN = "70b578b5b400d811889ded55b450435e4";
+        UpdateKey.APP_ID = "5804ce02959d6978550011ec";
+        UpdateKey.DialogOrNotification=UpdateKey.WITH_DIALOG;
+        UpdateFunGO.init(this);
     }
 
     public boolean CheckDownloadHtml(Context context) throws IOException {
@@ -258,6 +267,9 @@ public class MainActivity extends AppCompatActivity
                     e.printStackTrace();
                 }
             }
+        }else
+        if (id==R.id.update){
+            UpdateFunGO.manualStart(this);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -340,7 +352,7 @@ public class MainActivity extends AppCompatActivity
                     Intent stopintent=new Intent(this,ShakeService.class);
                     stopService(stopintent);
                 }
-                this.setTitle("作者及开源信息");
+                this.setTitle("软件信息");
                 AboutFragment aboutfragment= new AboutFragment();
                 manager = this.getFragmentManager();
                 transaction = manager.beginTransaction();
@@ -352,7 +364,7 @@ public class MainActivity extends AppCompatActivity
                     Intent stopintent=new Intent(this,ShakeService.class);
                     stopService(stopintent);
                 }
-                this.setTitle("版本说明");
+                this.setTitle("版本介绍");
                 VersionFragment versionfragment= new VersionFragment();
                 manager = this.getFragmentManager();
                 transaction = manager.beginTransaction();
@@ -446,6 +458,17 @@ public class MainActivity extends AppCompatActivity
             }
         }
         return isWork;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UpdateFunGO.onResume(this);
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        UpdateFunGO.onStop(this);
     }
 
 }

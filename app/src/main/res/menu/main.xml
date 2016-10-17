@@ -16,4 +16,9 @@
         android:orderInCategory="100"
         android:title="离线下载"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/update"
+        android:orderInCategory="100"
+        android:title="检查更新"
+        app:showAsAction="never" />
 </menu>

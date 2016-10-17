@@ -39,13 +39,25 @@
             android:id="@+id/show_content"/>
     </ScrollView>
 
-
-    <WebView
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:scrollbars="none"
-        android:id="@+id/webgit">
-    </WebView>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scrollbars="none">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:textSize="18sp"
+            android:shadowRadius="3.0"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:text="Just a test of Version"
+            android:id="@+id/history_version"/>
+    </ScrollView>
+
+
+
 
 </LinearLayout>
