@@ -4,7 +4,13 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +36,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -77,7 +84,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         snackbartemp=(Button)findViewById(R.id.snackbar_temp);
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -109,9 +115,9 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
             }
         }
-
-        UpdateKey.API_TOKEN = "70b578b5b400d811889ded55b450435e4";
-        UpdateKey.APP_ID = "5804ce02959d6978550011ec";
+        /*用于支持自动更新*/
+        UpdateKey.API_TOKEN = "70b578b5b400d811889ded55b450435e";
+        UpdateKey.APP_ID = "580582f5959d69785500182a";
         UpdateKey.DialogOrNotification=UpdateKey.WITH_DIALOG;
         UpdateFunGO.init(this);
     }
@@ -270,6 +276,15 @@ public class MainActivity extends AppCompatActivity
         }else
         if (id==R.id.update){
             UpdateFunGO.manualStart(this);
+        }else
+        if (id==R.id.share){
+            Resources r = MainActivity.this.getResources();
+            Bitmap bmp=BitmapFactory.decodeResource(r, R.drawable.share_app);
+            CustomPopDialog.Builder dialogBuild = new CustomPopDialog.Builder(MainActivity.this);
+            dialogBuild.setImage(bmp);
+            CustomPopDialog dialog = dialogBuild.create();
+            dialog.setCanceledOnTouchOutside(true);// 点击外部区域关闭
+            dialog.show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -460,6 +475,8 @@ public class MainActivity extends AppCompatActivity
         return isWork;
     }
 
+
+    //用于支持自动更新
     @Override
     protected void onResume() {
         super.onResume();

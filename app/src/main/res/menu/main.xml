@@ -21,4 +21,9 @@
         android:orderInCategory="100"
         android:title="检查更新"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/share"
+        android:orderInCategory="100"
+        android:title="分享"
+        app:showAsAction="never" />
 </menu>
