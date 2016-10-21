@@ -18,7 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="扫二维码分享BuptRoom~\n"/>
+            android:gravity="center"
+            android:text="与朋友共享BuptRoom~\n扫码或者截图分享\n"/>
 
         <ImageView
             android:id="@+id/img_qrcode"
@@ -26,6 +27,13 @@
             android:layout_height="wrap_content"
             android:src="@drawable/share_app"
             android:contentDescription="二维码" />
+
+        <Button
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/share_bt"
+            android:text="文字分享"/>
 
 
     </LinearLayout>

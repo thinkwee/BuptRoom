@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#0C091E</color>
     <color name="colorAccent">#FFFFFF</color>
     <color name="TextBackGroundColor">#55D8D8D8</color>
+    <color name="TextNowCLassBackGroundColor">#BBA2D3AE</color>
     <color name="TextBackGroundColorWelcome">#BB2E2E2E</color>
 
 

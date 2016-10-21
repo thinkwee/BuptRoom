@@ -39,6 +39,8 @@ public  class BuildingFragment extends Fragment {
     String htmlbody;
     View view1,view2,view3,view4,view5;
     ViewPager viewpager;
+    private TimeInfo timeinfo=new TimeInfo();
+    private int nowclass=0;
 
 
 
@@ -50,6 +52,30 @@ public  class BuildingFragment extends Fragment {
         strip.setDrawFullUnderline(false);
         strip.setTextSpacing(5);
         strip.setTabIndicatorColorResource(R.color.colorPrimary);
+
+        timeinfo.timesetting();
+
+        if (timeinfo.nowtime.contains("12")){
+            nowclass=0;
+        }else
+        if (timeinfo.nowtime.contains("34")){
+            nowclass=1;
+        }else
+        if (timeinfo.nowtime.contains("56")){
+            nowclass=2;
+        }else
+        if (timeinfo.nowtime.contains("78")){
+            nowclass=3;
+        }else
+        if (timeinfo.nowtime.contains("9")){
+            nowclass=4;
+        }else
+        if (timeinfo.nowtime.contains("10")){
+            nowclass=5;
+        }else
+        if (timeinfo.nowtime.contains("休息")){
+            nowclass=6;
+        }
 
        //把各个layout转成view,加入ViewPager中
         view1 = inflater.inflate(R.layout.building_1, container, false);
@@ -155,15 +181,21 @@ public  class BuildingFragment extends Fragment {
         tempclass = emptyroom.get_show_content(buildingname, htmlbody);
         t12 = (TextView) view.findViewById(R.id.jie12);
         t12.setText(tempclass.get(0));
+        if (nowclass==0) t12.setBackgroundColor(getResources().getColor(R.color.TextNowCLassBackGroundColor));
         t34 = (TextView) view.findViewById(R.id.jie34);
         t34.setText(tempclass.get(1));
+        if (nowclass==1) t34.setBackgroundColor(getResources().getColor(R.color.TextNowCLassBackGroundColor));
         t56 = (TextView) view.findViewById(R.id.jie56);
         t56.setText(tempclass.get(2));
+        if (nowclass==2) t56.setBackgroundColor(getResources().getColor(R.color.TextNowCLassBackGroundColor));
         t78 = (TextView) view.findViewById(R.id.jie78);
         t78.setText(tempclass.get(3));
+        if (nowclass==3) t78.setBackgroundColor(getResources().getColor(R.color.TextNowCLassBackGroundColor));
         t9 = (TextView) view.findViewById(R.id.jie9);
         t9.setText(tempclass.get(4));
+        if (nowclass==4) t9.setBackgroundColor(getResources().getColor(R.color.TextNowCLassBackGroundColor));
         t1011 = (TextView) view.findViewById(R.id.jie1011);
         t1011.setText(tempclass.get(5));
+        if (nowclass==5) t1011.setBackgroundColor(getResources().getColor(R.color.TextNowCLassBackGroundColor));
     }
 }
