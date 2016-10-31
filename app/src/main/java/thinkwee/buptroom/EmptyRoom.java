@@ -113,7 +113,7 @@ public class EmptyRoom {
          */
 
         k++;
-        while (1 == 1) {
+        while (1 == 1&k<RawRoomInfo.length) {
             if (RawRoomInfo[k].contains("楼") || RawRoomInfo[k].contains("节") || RawRoomInfo[k].contains("图"))         break;
             switch (c) {
                 case 1:

@@ -38,19 +38,13 @@ public class HomePageFragment extends Fragment {
 
         mAdapter= new MyRecyclerAdapter(super.getActivity(),mDatas );
         LinearLayoutManager layoutManager = new LinearLayoutManager(super.getActivity());
-        //设置布局管理器
         recyclerview.setLayoutManager(layoutManager);
-        //设置为垂直布局，这也是默认的
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
-        //设置Adapter
         recyclerview.setAdapter(mAdapter);
+
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(recyclerview,
                         new SwipeableRecyclerViewTouchListener.SwipeListener() {
-                            public boolean canSwipe(int position) {
-                                return true;
-                            }
-
                             @Override
                             public boolean canSwipeLeft(int position) {
                                 return true;
