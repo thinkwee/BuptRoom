@@ -31,14 +31,6 @@ import android.view.View;
 
 public class ColorPicker extends View {
 
-    /**
-     * Customizable display parameters (in percents)
-     */
-    private final int paramOuterPadding = 2; // outer padding of the whole color picker view
-    private final int paramInnerPadding = 5; // distance between value slider wheel and inner color wheel
-    private final int paramValueSliderWidth = 10; // width of the value slider
-    private final int paramArrowPointerSize = 4; // size of the arrow pointer; set to 0 to hide the pointer
-
     private Paint colorWheelPaint;
     private Paint valueSliderPaint;
 
@@ -58,10 +50,6 @@ public class ColorPicker extends View {
     private Path arrowPointerPath;
 
     private Bitmap colorWheelBitmap;
-
-    private int valueSliderWidth;
-    private int innerPadding;
-    private int outerPadding;
 
     private int arrowPointerSize;
     private int outerWheelRadius;
@@ -230,10 +218,17 @@ public class ColorPicker extends View {
         int centerX = width / 2;
         int centerY = height / 2;
 
-        innerPadding = (int) (paramInnerPadding * width / 100);
-        outerPadding = (int) (paramOuterPadding * width / 100);
-        arrowPointerSize = (int) (paramArrowPointerSize * width / 100);
-        valueSliderWidth = (int) (paramValueSliderWidth * width / 100);
+        int paramInnerPadding = 5;
+        int innerPadding = paramInnerPadding * width / 100;
+        /*
+      Customizable display parameters (in percents)
+     */
+        int paramOuterPadding = 2;
+        int outerPadding = paramOuterPadding * width / 100;
+        int paramArrowPointerSize = 4;
+        arrowPointerSize = paramArrowPointerSize * width / 100;
+        int paramValueSliderWidth = 10;
+        int valueSliderWidth = paramValueSliderWidth * width / 100;
 
         outerWheelRadius = width / 2 - outerPadding - arrowPointerSize;
         innerWheelRadius = outerWheelRadius - valueSliderWidth;

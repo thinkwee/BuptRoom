@@ -9,7 +9,7 @@
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:scrollbars="none"
         android:layout_marginTop="15dp"
@@ -18,7 +18,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -32,7 +32,7 @@
                 android:textStyle="bold"
                 android:background="@color/TextBackGroundColor"
                 android:textColor="@color/colorAccent"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+
                 android:layout_marginTop="15dp"/>
             <TextView
                 android:id="@+id/jie34"
@@ -45,7 +45,7 @@
                 android:textStyle="bold"
                 android:background="@color/TextBackGroundColor"
                 android:textColor="@color/colorAccent"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+
                 android:layout_marginTop="15dp"/>
             <TextView
                 android:id="@+id/jie56"
@@ -58,7 +58,7 @@
                 android:textStyle="bold"
                 android:background="@color/TextBackGroundColor"
                 android:textColor="@color/colorAccent"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+
                 android:layout_marginTop="15dp"/>
             <TextView
                 android:id="@+id/jie78"
@@ -71,7 +71,7 @@
                 android:textStyle="bold"
                 android:background="@color/TextBackGroundColor"
                 android:textColor="@color/colorAccent"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+
                 android:layout_marginTop="15dp"/>
             <TextView
                 android:id="@+id/jie9"
@@ -84,7 +84,7 @@
                 android:textStyle="bold"
                 android:background="@color/TextBackGroundColor"
                 android:textColor="@color/colorAccent"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+
                 android:layout_marginTop="15dp"/>
             <TextView
                 android:id="@+id/jie1011"
@@ -97,7 +97,7 @@
                 android:textStyle="bold"
                 android:background="@color/TextBackGroundColor"
                 android:textColor="@color/colorAccent"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
+
                 android:layout_marginTop="15dp"/>
 
         </LinearLayout>

@@ -18,33 +18,33 @@ import thinkwee.buptroom.R;
  * @author SHANHY(365384722@QQ.COM)
  * @date   2015年12月4日
  */
-public class CustomPopDialog extends Dialog {
+class CustomPopDialog extends Dialog {
 
     public CustomPopDialog(Context context) {
         super(context);
     }
 
-    public CustomPopDialog(Context context, int theme) {
+    private CustomPopDialog(Context context, int theme) {
         super(context, theme);
     }
 
-    public static class Builder {
+    static class Builder {
         private Context context;
         private Bitmap image;
 
-        public Builder(Context context) {
+        Builder(Context context) {
             this.context = context;
         }
 
-        public Bitmap getImage() {
+        Bitmap getImage() {
             return image;
         }
 
-        public void setImage(Bitmap image) {
+        void setImage(Bitmap image) {
             this.image = image;
         }
 
-        public CustomPopDialog create() {
+        CustomPopDialog create() {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final CustomPopDialog dialog = new CustomPopDialog(context, R.style.Dialog);

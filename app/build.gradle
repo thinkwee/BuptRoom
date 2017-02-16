@@ -5,10 +5,10 @@ android {
     buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "thinkwee.buptroom"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 24
-        versionCode 23
-        versionName "1.3.0 hotfix"
+        versionCode 25
+        versionName "1.4.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

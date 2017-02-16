@@ -19,16 +19,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
+class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
 
     private  List<Map<String,Object>> mDatas;
-    private Context mContext;
     private LayoutInflater inflater;
 
-    public MyRecyclerAdapter(Context context, List<Map<String,Object>> datas){
-        this. mContext=context;
+    MyRecyclerAdapter(Context context, List<Map<String, Object>> datas){
         this. mDatas=datas;
-        inflater=LayoutInflater. from(mContext);
+        inflater=LayoutInflater. from(context);
     }
 
     @Override
@@ -51,8 +49,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = inflater.inflate(R.layout.cardview,parent, false);
-        MyViewHolder holder= new MyViewHolder(view);
-        return holder;
+        return new MyViewHolder(view);
     }
 
     class MyViewHolder extends ViewHolder{
@@ -60,7 +57,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         TextView tv;
         ImageView img;
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
             tv=(TextView) view.findViewById(R.id. textview);
             img=(ImageView) view.findViewById(R.id.imageview);

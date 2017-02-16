@@ -1,18 +1,31 @@
 package thinkwee.buptroom;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import android.view.View;
+import android.widget.Toast;
 
 /**
  * Created by think on 20162016/10/9 00098:48
@@ -24,10 +37,14 @@ import android.view.View;
 public class SettingActivity extends AppCompatActivity {
 
     private Button colorbt;
+    private Button savebt;
     private thinkwee.buptroom.ColorPicker colorpicker;
     private int getcolorint;
     private LinearLayout settinglayout;
-    private String alpha,red,green,blue;
+    private int savecolor;
+    private String red;
+    private String green;
+    private String blue;
     private Toolbar toolbar;
     private static String TAG="COLOR";
     private int colorr[]={161,241,179,194,71,63,23,236,168,202,139,117,216,210,177,167,255,157,65,239,216,118};
@@ -36,6 +53,8 @@ public class SettingActivity extends AppCompatActivity {
     private int mindis=195075;//255*255*3
     private int maxnum=0;
     private int btflag=0;
+    private int choosepic;
+    private int fisrt=0;
 
     private ArrayList<Integer> wallpapers=new ArrayList<>();
     @Override
@@ -58,11 +77,14 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
         colorbt=(Button)findViewById(R.id.getcolor);
+        savebt=(Button)findViewById(R.id.savecolor);
         colorpicker=(thinkwee.buptroom.ColorPicker)findViewById(R.id.colorPicker);
         settinglayout=(LinearLayout)findViewById(R.id.settinglayout);
         colorbt.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
+                fisrt=1;
                 if (btflag==0){
                     getcolorint=colorpicker.getColor();
                     Log.i(TAG,convertToARGB(getcolorint));//不可以删除,用于产生十六进制redbluegreen设置标题栏
@@ -70,6 +92,15 @@ public class SettingActivity extends AppCompatActivity {
                     maxnum=findmaxnum(Color.red(getcolorint),Color.green(getcolorint),Color.blue(getcolorint));
                     settinglayout.setBackgroundResource(wallpapers.get(maxnum));
                     toolbar.setBackgroundColor(Color.parseColor("#"+red+green+blue));
+
+                    Window window = SettingActivity.this.getWindow();
+                    //取消设置透明状态栏,使 ContentView 内容不再覆盖状态栏
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                    //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    //设置状态栏颜色
+                    window.setStatusBarColor(Color.parseColor("#"+red+green+blue));
+
                     colorbt.setText("再选一次");
                     colorpicker.setVisibility(View.INVISIBLE);
                     btflag=1;
@@ -132,11 +163,9 @@ public class SettingActivity extends AppCompatActivity {
 
     /** 转化为ARGB格式字符串
      * For custom purposes. Not used by ColorPickerPreferrence
-     * @param color
-     * @author Unknown
      */
     public  String convertToARGB(int color) {
-        alpha = Integer.toHexString(Color.alpha(color));
+        String alpha = Integer.toHexString(Color.alpha(color));
         red = Integer.toHexString(Color.red(color));
         green = Integer.toHexString(Color.green(color));
         blue = Integer.toHexString(Color.blue(color));
@@ -160,7 +189,31 @@ public class SettingActivity extends AppCompatActivity {
         return "#" + alpha + " "+red + " "+ green+ " " + blue;
     }
 
+    public void SaveColorNow(View view){
+        /**
+         * Created by Thinkwee on 2016/10/13 0013 11:12
+         * Parameter [context]上下文
+         * Return void
+         * CLASS:MainActivity
+         * FILE:MainActivity.java
+         * TODO:保存选择的颜色
+         */
+        if (fisrt==0) {
+            Snackbar.make(savebt, "请先选取颜色", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+
+        }else{
+            Snackbar.make(savebt, "修改主题成功，重启后生效", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+            SharedPreferences sharedPreferences = getSharedPreferences("colorsave", Context.MODE_APPEND);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("maincolor", Color.parseColor("#"+red+green+blue));
+            editor.putInt("imgnum",maxnum);
+            Log.i(TAG,Integer.toString(maxnum));
+            editor.commit();//提交修改
+        }
 
 
+    }
 
 }

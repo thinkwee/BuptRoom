@@ -45,7 +45,6 @@ public class WelcomeActivity extends Activity {
 
     private int HaveNetFlag=0;
     private WebView webView;
-    private org.jsoup.nodes.Document document;
     private String htmlbody=null;
     private int WrongNet=1;
 
@@ -147,8 +146,8 @@ public class WelcomeActivity extends Activity {
 
         @JavascriptInterface
         public void getContent(String htmlContent){
-            document= Jsoup.parse(htmlContent);
-            htmlbody=document.getElementsByTag("body").text();
+            org.jsoup.nodes.Document document = Jsoup.parse(htmlContent);
+            htmlbody= document.getElementsByTag("body").text();
             HaveNetFlag=1;
             if (htmlbody.contains("楼"))   {WrongNet=0;Notification_show("教室信息拉取完成，可以查看空闲教室");}
             else Notification_show("无网络或非校园网，请重启或离线");

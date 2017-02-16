@@ -35,7 +35,6 @@ public  class BuildingFragment extends Fragment {
     @Nullable
     private View v;
     private EmptyRoom emptyroom=new EmptyRoom();
-    private PagerTabStrip strip;
     String htmlbody;
     View view1,view2,view3,view4,view5;
     ViewPager viewpager;
@@ -48,7 +47,7 @@ public  class BuildingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_building, container, false);
         viewpager = (ViewPager) v.findViewById(R.id.viewpager);
-        strip=(PagerTabStrip)v.findViewById(R.id.pager_title);
+        PagerTabStrip strip = (PagerTabStrip) v.findViewById(R.id.pager_title);
         strip.setDrawFullUnderline(false);
         strip.setTextSpacing(5);
         strip.setTabIndicatorColorResource(R.color.colorPrimary);
@@ -149,7 +148,7 @@ public  class BuildingFragment extends Fragment {
         }
 
         //设置view和标题
-        public MYViewPagerAdapter(ArrayList<View> views,ArrayList<String> titles){
+        MYViewPagerAdapter(ArrayList<View> views, ArrayList<String> titles){
             this.views=views;
             this.titles=titles;
         }

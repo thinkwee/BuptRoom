@@ -1,6 +1,10 @@
 package thinkwee.buptroom;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by think on 20162016/9/29 002917:03
@@ -12,7 +16,7 @@ import java.util.ArrayList;
  * String Building_Room_empty=emptyroom.get_show_content("楼名",htmlbody);
  */
 
-public class EmptyRoom {
+class EmptyRoom {
 
     private String[] RawRoomInfo=null;//将htmlbody去逗号，按空格和冒号分割后得到的优化信息
     private int count=0;
@@ -25,10 +29,10 @@ public class EmptyRoom {
     private int tsgflag=0;
     private int cishu=0;
 
-    public EmptyRoom() {
+    EmptyRoom() {
     }
 
-    public ArrayList<String> get_show_content(String keyword, String htmlbody){
+    ArrayList<String> get_show_content(String keyword, String htmlbody){
         /**
          * Created by Thinkwee on 2016/9/29 0029 17:54
          * Parameter [keyword, htmlbody] 楼名，网页拉取到的html_body内容
@@ -102,7 +106,7 @@ public class EmptyRoom {
 
 
 
-    public void SaveBuidlingInfo(int k,int c){
+    private void SaveBuidlingInfo(int k, int c){
         /**
          * Created by Thinkwee on 2016/9/28 0028 9:28
          * Parameter [k, c]当前字符串数组下标，节次
@@ -113,7 +117,7 @@ public class EmptyRoom {
          */
 
         k++;
-        while (1 == 1&k<RawRoomInfo.length) {
+        while (k < RawRoomInfo.length) {
             if (RawRoomInfo[k].contains("楼") || RawRoomInfo[k].contains("节") || RawRoomInfo[k].contains("图"))         break;
             switch (c) {
                 case 1:
@@ -141,7 +145,8 @@ public class EmptyRoom {
         }
     }
 
-    public String settlecontent(ArrayList<String> target){
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private String settlecontent(ArrayList<String> target){
 
         /**
          * Created by Thinkwee on 2016/9/28 0028 9:30
@@ -172,11 +177,11 @@ public class EmptyRoom {
             if (target.get(i).contains("-5")) f5=f5+target.get(i)+" ";else
             if (target.get(i).contains("图书")) result="图书馆一楼";
         }
-        if (f1!="") result=result+"一楼："+f1+"\n";
-        if (f2!="") result=result+"二楼："+f2+"\n";
-        if (f3!="") result=result+"三楼："+f3+"\n";
-        if (f4!="") result=result+"四楼："+f4+"\n";
-        if (f5!="") result=result+"五楼："+f5+"\n";
+        if (!Objects.equals(f1, "")) result=result+"一楼："+f1+"\n";
+        if (!Objects.equals(f2, "")) result=result+"二楼："+f2+"\n";
+        if (!Objects.equals(f3, "")) result=result+"三楼："+f3+"\n";
+        if (!Objects.equals(f4, "")) result=result+"四楼："+f4+"\n";
+        if (!Objects.equals(f5, "")) result=result+"五楼："+f5+"\n";
         return result;
 
     }

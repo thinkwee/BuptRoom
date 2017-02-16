@@ -85,7 +85,7 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
      * @param recyclerView The recycler view whose items should be dismissable by swiping.
      * @param listener     The listener for the swipe events.
      */
-    public SwipeableRecyclerViewTouchListener(RecyclerView recyclerView, SwipeListener listener) {
+    SwipeableRecyclerViewTouchListener(RecyclerView recyclerView, SwipeListener listener) {
         ViewConfiguration vc = ViewConfiguration.get(recyclerView.getContext());
         mSlop = vc.getScaledTouchSlop();
         mMinFlingVelocity = vc.getScaledMinimumFlingVelocity() * 16;
@@ -118,7 +118,7 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
      *
      * @param enabled Whether or not to watch for gestures.
      */
-    public void setEnabled(boolean enabled) {
+    private void setEnabled(boolean enabled) {
         mPaused = !enabled;
     }
 
@@ -380,7 +380,7 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
      * The callback interface used by {@link SwipeableRecyclerViewTouchListener} to inform its client
      * about a swipe of one or more list item positions.
      */
-    public interface SwipeListener {
+    interface SwipeListener {
         /**
          * Called to determine whether the given position can be swiped to the left.
          */
@@ -411,10 +411,10 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
     }
 
     class PendingDismissData implements Comparable<PendingDismissData> {
-        public int position;
+        int position;
         public View view;
 
-        public PendingDismissData(int position, View view) {
+        PendingDismissData(int position, View view) {
             this.position = position;
             this.view = view;
         }

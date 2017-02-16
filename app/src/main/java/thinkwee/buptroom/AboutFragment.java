@@ -25,11 +25,10 @@ import org.jsoup.Jsoup;
 public class AboutFragment extends Fragment {
     @Nullable
     private View v;
-    private TextView tv;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.about, container, false);
-        tv=(TextView)v.findViewById(R.id.show_content);
+        TextView tv = (TextView) v.findViewById(R.id.show_content);
         tv.setText(R.string.devoloper_openresource_string);
         return v;
     }

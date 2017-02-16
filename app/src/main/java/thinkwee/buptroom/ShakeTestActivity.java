@@ -20,7 +20,6 @@ import java.util.Random;
 
 public class ShakeTestActivity extends AppCompatActivity {
 
-    private TextView recommandroom;
     private Random random = new Random();
     private int nowclass=0;//现在时间所处节数，用于emptyroom.get_show_content返回数组的下标
     private TimeInfo timeinfo=new TimeInfo();
@@ -46,7 +45,7 @@ public class ShakeTestActivity extends AppCompatActivity {
                 finish();
             }
         });
-        recommandroom=(TextView)findViewById(R.id.RecommandRoom);
+        TextView recommandroom = (TextView) findViewById(R.id.RecommandRoom);
         Init();
         recommandroom.setText(Handle());
     }

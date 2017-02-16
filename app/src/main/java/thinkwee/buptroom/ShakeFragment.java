@@ -16,13 +16,12 @@ import android.widget.Button;
  */
 
 public class ShakeFragment extends Fragment {
-    private View v;
     private boolean shakedflag = false;
     public Button startbt;
     public Button endbt;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.fragment_shake, container, false);
+        View v = inflater.inflate(R.layout.fragment_shake, container, false);
         return v;
     }
 

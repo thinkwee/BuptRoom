@@ -25,14 +25,13 @@ import org.jsoup.Jsoup;
 public class VersionFragment extends Fragment {
     @Nullable
     private View v;
-    private TextView tv,versiontv;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.version, container, false);
-        tv=(TextView)v.findViewById(R.id.show_content);
+        TextView tv = (TextView) v.findViewById(R.id.show_content);
         tv.setText(R.string.version);
-        versiontv=(TextView)v.findViewById(R.id.history_version);
+        TextView versiontv = (TextView) v.findViewById(R.id.history_version);
         versiontv.setText(R.string.version_history);
         return v;
 

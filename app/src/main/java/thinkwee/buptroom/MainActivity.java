@@ -4,13 +4,15 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -25,15 +27,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.hugeterry.updatefun.UpdateFunGO;
@@ -48,27 +54,30 @@ public class MainActivity extends AppCompatActivity
                                     " π__π默默学习不说话",
                                     " （╯－＿－）╯╧╧ 学海无涯苦作舟",
                                     " (´･ω･｀)转眼间一周就过了一半了呢",
-                                    " ( ￣ ▽￣)o╭╯明天就是周末了！",
+                                    " ( ￣ ▽￣) o╭╯明天就是周末了！",
                                     " o(*≧▽≦)ツ周六浪起来~",
                                     " (╭￣3￣)╭♡ 忘记明天是周一吧"};
 
     private int WrongNet=1;//网络状况标志位
+    private int maincolor=0,imgnum=0;
     private FragmentManager manager;
     private FragmentTransaction transaction;
-    private BuildingFragment buildingfragment;
     private Button snackbartemp;
-    private ImageButton ProfileBt;
     public static final String TAG = "MainActivity";
     private int startcounts=0;
+    private ArrayList<Integer> wallpapers=new ArrayList<>();
+    private Toolbar toolbar;
+    private LinearLayout mainlayout;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Intent intent=getIntent();
         htmlbody=intent.getStringExtra("HtmlBody");
         WrongNet=intent.getIntExtra("WrongNet",0);
-
         this.setTitle("首页");
         HomePageFragment homepagefragment= new HomePageFragment();
         manager = this.getFragmentManager();
@@ -89,9 +98,32 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headview=navigationView.inflateHeaderView(R.layout.nav_header_main);
-        ProfileBt=(ImageButton)headview.findViewById(R.id.profile);
+        ImageButton profileBt = (ImageButton) headview.findViewById(R.id.profile);
 
-        ProfileBt.setOnClickListener(new View.OnClickListener(){
+        wallpapersinit();
+        SharedPreferences sharedPreferences = getSharedPreferences("colorsave", Context.MODE_APPEND);
+        maincolor = sharedPreferences.getInt("maincolor", 0);
+        imgnum = sharedPreferences.getInt("imgnum", -1);
+        mainlayout = (LinearLayout)findViewById(R.id.content_main);
+
+        Window window = MainActivity.this.getWindow();
+        //取消设置透明状态栏,使 ContentView 内容不再覆盖状态栏
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        //设置状态栏颜色
+
+        if (maincolor!=0) {
+            window.setStatusBarColor(maincolor);
+            toolbar.setBackgroundColor(maincolor);
+        }
+
+//        if (imgnum!=-1) {
+//            mainlayout.setBackgroundResource(wallpapers.get(imgnum));
+//        }
+
+
+        profileBt.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent();
@@ -100,10 +132,10 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-        AppStartCounts(MainActivity.this);
+        AppStartCounts();
         if (WrongNet==1){
             try {
-                if (htmlbody==null||(htmlbody!=null&&!htmlbody.contains("楼")))
+                if (htmlbody == null || !htmlbody.contains("楼"))
                     if(CheckDownloadHtml(MainActivity.this))
                         Snackbar.make(snackbartemp, "已从离线内容中加载", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
@@ -144,7 +176,7 @@ public class MainActivity extends AppCompatActivity
             return false;
     }
 
-    public void AppStartCounts(Context context){
+    public void AppStartCounts(){
         /**
          * Created by Thinkwee on 2016/10/13 0013 11:12
          * Parameter [context]上下文
@@ -153,36 +185,13 @@ public class MainActivity extends AppCompatActivity
          * FILE:MainActivity.java
          * TODO:统计软件启动次数 startcounts传到个人统计页面
          */
-        try {
-            File file=new File(context.getCacheDir(),"StartCounts.txt");
-            if (file.exists()){
-                FileInputStream fis=new FileInputStream(file);
-                BufferedReader br=new BufferedReader(new InputStreamReader(fis));
-                String temp=br.readLine();
-                if (temp==null){
-                    startcounts=1;
-                    Log.i(TAG,"Startcounts文件读错误");
-                }
-                else{
-                    startcounts=Integer.parseInt(temp);
-                    Log.i(TAG,"第"+temp+"次启动软件");
-                }
-                fis.close();
-                br.close();
-                FileOutputStream fos=new FileOutputStream(file);
-                startcounts++;
-                fos.write(Integer.toString(startcounts).getBytes());
-                fos.close();
-            }else{
-                file.createNewFile();
-                FileOutputStream fos=new FileOutputStream(file);
-                Log.i(TAG,"首次创建Startcounts");
-                fos.write(Integer.toString(startcounts).getBytes());
-                fos.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        SharedPreferences sharedPreferences = getSharedPreferences("startcount", Context.MODE_APPEND);
+        startcounts = sharedPreferences.getInt("startcount", 0);
+        startcounts++;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("startcount", startcounts);
+        editor.commit();//提交修改
     }
 
     public void DownloadHtml(Context context){
@@ -204,8 +213,8 @@ public class MainActivity extends AppCompatActivity
             final TimeInfo timeinfo= new TimeInfo();
             timeinfo.timesetting();
             fos.write((timeinfo.Timestring+"\n").getBytes());
-            fos.write((htmlbody.toString()).getBytes());
-            Log.i(TAG,"已离线htmlbody"+htmlbody.toString());
+            fos.write((htmlbody).getBytes());
+            Log.i(TAG,"已离线htmlbody"+ htmlbody);
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -325,7 +334,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         /**
          * Created by Thinkwee on 2016/9/28 0028 9:27
          * Parameter [item]
@@ -342,16 +351,16 @@ public class MainActivity extends AppCompatActivity
                     showAlertDialog();
                 }
                 else{
-                    if (isServiceWork(MainActivity.this,"thinkwee.buptroom.ShakeService")==true) {
+                    if (isServiceWork(MainActivity.this, "thinkwee.buptroom.ShakeService")) {
                         Intent stopintent=new Intent(this,ShakeService.class);
                         stopService(stopintent);
                     }
                     this.setTitle("教室查询");
-                    buildingfragment= new BuildingFragment();
+                    BuildingFragment buildingfragment = new BuildingFragment();
                     Bundle bundle=new Bundle();
                     bundle.putString("htmlbody",htmlbody);
                     buildingfragment.setArguments(bundle);
-                    buildingfragment.Init();;
+                    buildingfragment.Init();
                     manager = this.getFragmentManager();
                     transaction = manager.beginTransaction();
                     transaction.replace(R.id.frame, buildingfragment);
@@ -359,7 +368,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }
             else if (id == R.id.developer_opensource) {
-                if (isServiceWork(MainActivity.this,"thinkwee.buptroom.ShakeService")==true) {
+                if (isServiceWork(MainActivity.this, "thinkwee.buptroom.ShakeService")) {
                     Intent stopintent=new Intent(this,ShakeService.class);
                     stopService(stopintent);
                 }
@@ -371,7 +380,7 @@ public class MainActivity extends AppCompatActivity
                 transaction.commit();
             }
             else if (id == R.id.version) {
-                if (isServiceWork(MainActivity.this,"thinkwee.buptroom.ShakeService")==true) {
+                if (isServiceWork(MainActivity.this, "thinkwee.buptroom.ShakeService")) {
                     Intent stopintent=new Intent(this,ShakeService.class);
                     stopService(stopintent);
                 }
@@ -383,7 +392,7 @@ public class MainActivity extends AppCompatActivity
                 transaction.commit();
             }
             else if (id == R.id.homepage) {
-                if (isServiceWork(MainActivity.this,"thinkwee.buptroom.ShakeService")==true) {
+                if (isServiceWork(MainActivity.this, "thinkwee.buptroom.ShakeService")) {
                     Intent stopintent=new Intent(this,ShakeService.class);
                     stopService(stopintent);
                 }
@@ -395,7 +404,7 @@ public class MainActivity extends AppCompatActivity
                 transaction.commit();
             }
             else if (id==R.id.theme_choose){
-                if (isServiceWork(MainActivity.this,"thinkwee.buptroom.ShakeService")==true) {
+                if (isServiceWork(MainActivity.this, "thinkwee.buptroom.ShakeService")) {
                     Intent stopintent=new Intent(this,ShakeService.class);
                     stopService(stopintent);
                 }
@@ -404,16 +413,22 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
             else  if (id==R.id.shake){
-                this.setTitle("摇一摇");
-                Intent intent = new Intent();
-                intent.putExtra("htmlbody",htmlbody);
-                intent.setClass(this, ShakeService.class);
-                startService(intent);
-                ShakeFragment shakefragment=new ShakeFragment();
-                manager = this.getFragmentManager();
-                transaction = manager.beginTransaction();
-                transaction.replace(R.id.frame, shakefragment);
-                transaction.commit();
+                if (WrongNet==1){
+                    showAlertDialog();
+                }
+                else{
+                    this.setTitle("摇一摇");
+                    Intent intent = new Intent();
+                    intent.putExtra("htmlbody",htmlbody);
+                    intent.setClass(this, ShakeService.class);
+                    startService(intent);
+                    ShakeFragment shakefragment=new ShakeFragment();
+                    manager = this.getFragmentManager();
+                    transaction = manager.beginTransaction();
+                    transaction.replace(R.id.frame, shakefragment);
+                    transaction.commit();
+                }
+
             }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -462,13 +477,38 @@ public class MainActivity extends AppCompatActivity
             return false;
         }
         for (int i = 0; i < myList.size(); i++) {
-            String mName = myList.get(i).service.getClassName().toString();
+            String mName = myList.get(i).service.getClassName();
             if (mName.equals(serviceName)) {
                 isWork = true;
                 break;
             }
         }
         return isWork;
+    }
+
+    public void wallpapersinit(){
+        wallpapers.add(R.drawable.ailv);
+        wallpapers.add(R.drawable.chabai);
+        wallpapers.add(R.drawable.chase);
+        wallpapers.add(R.drawable.chi);
+        wallpapers.add(R.drawable.dai);
+        wallpapers.add(R.drawable.dailan);
+        wallpapers.add(R.drawable.dianqing);
+        wallpapers.add(R.drawable.feise);
+        wallpapers.add(R.drawable.guan);
+        wallpapers.add(R.drawable.hupo);
+        wallpapers.add(R.drawable.jiangzi);
+        wallpapers.add(R.drawable.li);
+        wallpapers.add(R.drawable.qiuxiangse);
+        wallpapers.add(R.drawable.shuilv);
+        wallpapers.add(R.drawable.tan);
+        wallpapers.add(R.drawable.tuose);
+        wallpapers.add(R.drawable.yan);
+        wallpapers.add(R.drawable.yanzhi);
+        wallpapers.add(R.drawable.yaqing);
+        wallpapers.add(R.drawable.yase);
+        wallpapers.add(R.drawable.yuebai);
+        wallpapers.add(R.drawable.zhuqing);
     }
 
 

@@ -30,13 +30,31 @@
         android:layout_gravity="center"
         android:layout_weight="0.8"/>
 
-    <Button
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/getcolor"
-        android:text="选取颜色"
-        android:layout_gravity="center"
-        />
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/getcolor"
+            android:text="选取颜色"
+            android:layout_gravity="center"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/savecolor"
+            android:text="保存设置"
+            android:onClick="SaveColorNow"
+            android:layout_gravity="center"
+            />
+
+
+    </LinearLayout>
+
 
 
 

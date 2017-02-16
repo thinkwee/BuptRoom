@@ -3,12 +3,15 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
-    <string name="devoloper_openresource_string">"开发：Thinkwee\n测试：Sworduo\n\n版本:V1.3.0 hotfix\n\n项目托管:Github\n分发:Fir.im\n"</string>
-    <string name="version">"未来计划\n1.3.1版本计划
-1. 课表功能
-2. 校招feed流
-3. 优化离线功能\n"</string>
-    <string name="version_history">"当前版本1.3.0 hotfix
-1. 现在首页是真正的卡片了
-2. 推出了非常有意思的主题设置功能\n但还在测试阶段，只能暂时设置\n3. 紧急修复了一个可能导致卡退的越界错误"</string>
+    <string name="devoloper_openresource_string">"开发：Thinkwee\n测试：Sworduo\n\n版本:V1.4.0 、项目托管:Github\n分发:Fir.im\n"</string>
+    <string name="version">"未来计划\n
+        1.5.0版本计划\n
+        1. 课表功能\n
+        2. 校招feed流\n
+        3. 多线程优化\n"</string>
+    <string name="version_history">"当前版本1.4.0\n
+        1. 可以设置主题了(也因此最低版本要求5.0)\n
+        2. 大幅度优化底层代码\n
+        3. 优化了文件存储\n"</string>
+    <string name="just_a_test_of_version">Just a test of Version</string>
 </resources>

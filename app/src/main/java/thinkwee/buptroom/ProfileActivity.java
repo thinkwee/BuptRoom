@@ -16,8 +16,6 @@ import android.widget.Button;
  */
 
 public class ProfileActivity extends AppCompatActivity {
-    private int startcounts;
-    private Button startcountsbt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +23,8 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_profile);
         toolbar.setTitle("个人首页");
         Intent intent=getIntent();
-        startcounts=intent.getIntExtra("StartCounts",5);
-        startcountsbt=(Button)findViewById(R.id.startcountsbt);
+        int startcounts = intent.getIntExtra("StartCounts", 1);
+        Button startcountsbt = (Button) findViewById(R.id.startcountsbt);
         startcountsbt.setText("使用次数\n"+String.valueOf(startcounts));
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.arrow_back);

@@ -32,7 +32,6 @@
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:id="@+id/textview"
-                android:text="1\n嗨，欢迎使用BuptRoom\n这款软件能够帮您快速找到自习室"
                 android:textSize="15sp" />
 
         </LinearLayout>
