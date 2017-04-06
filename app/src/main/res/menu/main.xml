@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/refresh"
+        android:orderInCategory="100"
+        android:title="刷新"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/timeinfo"
         android:orderInCategory="100"
         android:title="时间助手"

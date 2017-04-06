@@ -19,7 +19,6 @@ import org.jsoup.Jsoup;
  * Created by think on 20162016/10/8 000818:35
  * PACKAGE:thinkwee.buptroom
  * PROJECT:BuptRoom
- * TODO:版本信息
  */
 
 public class VersionFragment extends Fragment {

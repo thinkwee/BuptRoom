@@ -17,9 +17,6 @@
     android:visibility="visible"
     >
 
-    <!--关于界面
-    一个TextView加一个Webview,Webview用于显示github上的readme.md界面，即软件介绍
-    -->
 
     <ScrollView
         android:layout_width="fill_parent"

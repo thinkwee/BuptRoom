@@ -4,7 +4,6 @@ package thinkwee.buptroom;
  * Created by think on 20162016/10/25 002511:14
  * PACKAGE:thinkwee.buptroom
  * PROJECT:BuptRoom
- * TODO:
  */
 
 import java.util.List;
@@ -21,12 +20,12 @@ import android.widget.TextView;
 
 class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
 
-    private  List<Map<String,Object>> mDatas;
+    private List<Map<String, Object>> mDatas;
     private LayoutInflater inflater;
 
-    MyRecyclerAdapter(Context context, List<Map<String, Object>> datas){
-        this. mDatas=datas;
-        inflater=LayoutInflater. from(context);
+    MyRecyclerAdapter(Context context, List<Map<String, Object>> datas) {
+        this.mDatas = datas;
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -39,8 +38,8 @@ class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHol
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        holder.tv.setText(((String)mDatas.get(position).get("text")));
-        holder.img.setImageResource((Integer)mDatas.get(position).get("img"));
+        holder.tv.setText(((String) mDatas.get(position).get("text")));
+        holder.img.setImageResource((Integer) mDatas.get(position).get("img"));
 
     }
 
@@ -48,19 +47,19 @@ class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHol
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = inflater.inflate(R.layout.cardview,parent, false);
+        View view = inflater.inflate(R.layout.cardview, parent, false);
         return new MyViewHolder(view);
     }
 
-    class MyViewHolder extends ViewHolder{
+    class MyViewHolder extends ViewHolder {
 
         TextView tv;
         ImageView img;
 
         MyViewHolder(View view) {
             super(view);
-            tv=(TextView) view.findViewById(R.id. textview);
-            img=(ImageView) view.findViewById(R.id.imageview);
+            tv = (TextView) view.findViewById(R.id.textview);
+            img = (ImageView) view.findViewById(R.id.imageview);
         }
     }
 

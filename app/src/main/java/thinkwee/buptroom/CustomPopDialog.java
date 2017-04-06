@@ -16,7 +16,7 @@ import thinkwee.buptroom.R;
  * 该自定义Dialog应用在：弹出框居中显示图片，点击其他区域自动关闭Dialog
  *
  * @author SHANHY(365384722@QQ.COM)
- * @date   2015年12月4日
+ * @date 2015年12月4日
  */
 class CustomPopDialog extends Dialog {
 
@@ -53,20 +53,20 @@ class CustomPopDialog extends Dialog {
                     android.view.ViewGroup.LayoutParams.WRAP_CONTENT
                     , android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
             dialog.setContentView(layout);
-            ImageView img = (ImageView)layout.findViewById(R.id.img_qrcode);
+            ImageView img = (ImageView) layout.findViewById(R.id.img_qrcode);
             img.setImageBitmap(getImage());
-            Button sharebt=(Button)layout.findViewById(R.id.share_bt);
+            Button sharebt = (Button) layout.findViewById(R.id.share_bt);
             sharebt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String sharecontent="  Stay Hungry Stay Foolish\n" +
+                    String sharecontent = "  Stay Hungry Stay Foolish\n" +
                             "Stay Studying With BuptRoom\n" +
                             "————————————————\n" +
                             "   http://fir.im/buptroom\n" +
                             "————————————————";
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
-                    sendIntent.putExtra(Intent.EXTRA_TEXT,sharecontent);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, sharecontent);
                     sendIntent.setType("text/plain");
                     context.startActivity(Intent.createChooser(sendIntent, "分享到"));
                 }

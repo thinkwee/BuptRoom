@@ -1,27 +1,27 @@
 
-        package thinkwee.buptroom;
+package thinkwee.buptroom;
 
-        import android.animation.Animator;
-        import android.animation.AnimatorListenerAdapter;
-        import android.animation.ValueAnimator;
-        import android.annotation.TargetApi;
-        import android.graphics.Rect;
-        import android.os.Build;
-        import android.os.SystemClock;
-        import android.support.annotation.NonNull;
-        import android.support.v4.view.ViewCompat;
-        import android.support.v4.view.ViewPropertyAnimatorListener;
-        import android.support.v7.widget.RecyclerView;
-        import android.view.MotionEvent;
-        import android.view.VelocityTracker;
-        import android.view.View;
-        import android.view.ViewConfiguration;
-        import android.view.ViewGroup;
-        import android.widget.ListView;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
+import android.graphics.Rect;
+import android.os.Build;
+import android.os.SystemClock;
+import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorListener;
+import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
+import android.view.VelocityTracker;
+import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
-        import java.util.ArrayList;
-        import java.util.Collections;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 /**
@@ -172,7 +172,7 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
                     mDownPosition = mRecyclerView.getChildLayoutPosition(mDownView);
                     mSwipingLeft = mSwipeListener.canSwipeLeft(mDownPosition);
                     mSwipingRight = mSwipeListener.canSwipeRight(mDownPosition);
-                    if (mSwipingLeft||mSwipingRight) {
+                    if (mSwipingLeft || mSwipingRight) {
                         mVelocityTracker = VelocityTracker.obtain();
                         mVelocityTracker.addMovement(motionEvent);
                     } else {
@@ -286,9 +286,9 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
                     mSwipingSlop = (deltaX > 0 ? mSlop : -mSlop);
                 }
 
-                if(deltaX < 0 && !mSwipingLeft)
+                if (deltaX < 0 && !mSwipingLeft)
                     mSwiping = false;
-                if(deltaX > 0 && !mSwipingRight)
+                if (deltaX > 0 && !mSwipingRight)
                     mSwiping = false;
 
                 if (mSwiping) {
