@@ -120,7 +120,7 @@ public class WelcomeActivity extends Activity {
          */
 
         Notification.Builder mBuilder = new Notification.Builder(this);
-        Bitmap LB = BitmapFactory.decodeResource(getResources(), R.mipmap.launcher);
+        Bitmap LB = BitmapFactory.decodeResource(getResources(), R.drawable.logoko);
         Intent resultIntent = new Intent(WelcomeActivity.this, MainActivity.class);
         resultIntent.putExtra("WrongNet", WrongNet);
         resultIntent.putExtra("HtmlBody", htmlbody);
@@ -132,7 +132,7 @@ public class WelcomeActivity extends Activity {
                 .setSubText("滑动取消此消息")                    //内容下面的一小段文字
                 .setTicker("BuptRoom提醒")                      //收到信息后状态栏显示的文字信息
                 .setWhen(System.currentTimeMillis())              //设置通知时间
-                .setSmallIcon(R.mipmap.launcher)             //设置小图标
+                .setSmallIcon(R.drawable.logoko)             //设置小图标
                 .setLargeIcon(LB)                     //设置大图标
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)    //设置默认的三色灯与振动器
                 .setAutoCancel(true)                           //设置点击后取消Notification

@@ -541,7 +541,7 @@ public class MainActivity extends AppCompatActivity
                     break;
                 case 6:
                     new AlertDialog.Builder(MainActivity.this).setTitle("确认退出吗？")
-                            .setIcon(R.mipmap.launcher)
+                            .setIcon(R.drawable.logoko)
                             .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

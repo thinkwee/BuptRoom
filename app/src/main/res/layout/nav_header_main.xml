@@ -23,7 +23,7 @@
         android:scaleType="fitXY"
         android:background="@color/transparent"
         android:onClick="ProfileBt"
-        android:src="@mipmap/launcher" />
+        android:src="@drawable/logoko" />
 
     <TextView
         android:layout_width="match_parent"

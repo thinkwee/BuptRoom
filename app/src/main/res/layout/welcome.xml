@@ -11,7 +11,9 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/welcome2" />
+        android:src="@drawable/welcome2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/chicken_soup"
@@ -22,7 +24,7 @@
         android:background="@color/TextBackGroundColorWelcome"
         android:clickable="true"
         android:gravity="center"
-        android:text="\n  “We're here to put a dent in the universe”  \n"
+        android:text="@string/welcomestring"
         android:textColor="@color/colorAccent"
         android:textSize="16sp" />
 
@@ -31,28 +33,23 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/chicken_soup"
-        android:layout_toRightOf="@+id/welcome_icon"
         android:background="@color/TextBackGroundColorWelcome"
         android:clickable="true"
-        android:gravity="left|center_vertical"
-        android:text="  BuptRoom"
+        android:gravity="center_horizontal"
+        android:text="@string/welcometitle"
         android:textColor="@color/colorAccent"
         android:textSize="25sp" />
 
-    <ImageButton
-        android:id="@+id/welcome_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/chicken_soup"
-        android:layout_alignParentStart="true"
-        android:background="@color/TextBackGroundColorWelcome"
-        android:src="@mipmap/launcher" />
 
     <WebView
         android:id="@+id/GetHtml"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"></WebView>
+        android:visibility="invisible"
+        android:layout_above="@+id/welcome_title"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="236dp"
+        android:layout_marginBottom="36dp" />
 
 
 
