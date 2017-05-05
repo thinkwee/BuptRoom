@@ -7,6 +7,6 @@
     <string name="version">"1.7.0版本计划\n1. 课表功能\n2. 校招feed流\n"</string>
     <string name="version_history">"当前版本1.6.0\n1. 修复了初始化拉取教室信息的错误\n2.全新视觉\n3. 重新设计了消息提醒\n"</string>
     <string name="just_a_test_of_version">Just a test of Version</string>
-    <string name="welcomestring">“We\'re here to put a dent in the universe”</string>
+    <string name="welcomestring">“We\'re here to put a dent in the universe”\n</string>
     <string name="welcometitle">BuptRoom</string>
 </resources>

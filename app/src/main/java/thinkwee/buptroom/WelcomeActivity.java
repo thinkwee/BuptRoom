@@ -75,7 +75,7 @@ public class WelcomeActivity extends Activity {
                 animation.setFillAfter(true);
                 img.startAnimation(animation);
             }
-        }, 250);
+        }, 50);
 
 
         new Handler().postDelayed(new Runnable() {
@@ -92,7 +92,7 @@ public class WelcomeActivity extends Activity {
 //                else
 //                    Notification_show("教室信息拉取失败");
             }
-        }, 1000);
+        }, 2000);
 
         new Handler().postDelayed(new Runnable() {
 
@@ -106,7 +106,7 @@ public class WelcomeActivity extends Activity {
 
             }
 
-        }, 1500);
+        }, 2500);
     }
 
 //    public void Notification_show(String Notification_content) {

@@ -90,7 +90,7 @@ public class Webget {
             }
         };
         Timer timer = new Timer();
-        timer.schedule(task, 1000);
+        timer.schedule(task, 2000);
         return HaveNetFlag;
     }
 

@@ -317,7 +317,7 @@ public class MainActivity extends AppCompatActivity
                     WrongNet = webget.getWrongnet();
                     htmlbody = webget.getHtmlbody();
                 }
-            }, 1000);
+            }, 2000);
             if (WrongNet == 0) {
                 Message msg = dishandler.obtainMessage();
                 msg.what = 8;
