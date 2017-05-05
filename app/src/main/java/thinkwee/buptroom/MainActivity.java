@@ -26,6 +26,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +35,7 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 import java.io.BufferedReader;
@@ -82,7 +84,18 @@ public class MainActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         htmlbody = intent.getStringExtra("HtmlBody");
-        WrongNet = intent.getIntExtra("WrongNet", 0);
+        WrongNet = intent.getIntExtra("WrongNet", 1);
+        Toast netcheck = Toast.makeText(getApplicationContext(),
+                "自定义位置Toast", Toast.LENGTH_LONG);
+        netcheck.setGravity(Gravity.TOP, 0, 200);
+        if (WrongNet == 0) {
+            netcheck.setText("教室信息已更新");
+            netcheck.show();
+        } else {
+            netcheck.setText("教室信息更新失败，请刷新");
+            netcheck.show();
+        }
+
         this.setTitle("首页");
         HomePageFragment homepagefragment = new HomePageFragment();
         manager = this.getFragmentManager();
@@ -108,6 +121,7 @@ public class MainActivity extends AppCompatActivity
         wallpapersinit();
         SharedPreferences sharedPreferences = getSharedPreferences("colorsave", Context.MODE_APPEND);
         int maincolor = sharedPreferences.getInt("maincolor", 0);
+        Log.i("maincolor", maincolor + "");
 
         Window window = MainActivity.this.getWindow();
         //取消设置透明状态栏,使 ContentView 内容不再覆盖状态栏

@@ -25,7 +25,7 @@ public class Webget {
     private WebView webView;
     private int HaveNetFlag = 0;
     private String htmlbody = null;
-    private int WrongNet = -1;
+    private int WrongNet = 2;
 
     public void init(WebView wb) {
         webView = wb;
@@ -61,13 +61,14 @@ public class Webget {
                 WrongNet = 0;
             } else
                 WrongNet = 1;
-            Log.i("welcome","a"+WrongNet);
-            Log.i("welcome","html: "+htmlbody);
+            Log.i("welcome", "1HaveNetFlag: " + HaveNetFlag);
+            Log.i("welcome", "1Wrongnet: " + WrongNet);
+            Log.i("welcome", "1html: " + htmlbody);
         }
     }
 
 
-    public void WebInit() {
+    public int WebInit() {
         /**
          * Created by Thinkwee on 2016/10/8 0008 21:23
          * Parameter []
@@ -75,19 +76,22 @@ public class Webget {
          * CLASS:MainActivity
          * FILE:MainActivity.java
          */
-
+        Log.i("WebView", "onLoadUrlStarted");
         webView.getSettings().setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new JavascriptHandler(), "handler");
         webView.setWebViewClient(new MyWebViewClient());
         webView.loadUrl("http://jwxt.bupt.edu.cn/zxqDtKxJas.jsp");
+        Log.i("WebView", "onLoadUrlFinished");
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                if (HaveNetFlag == 0) ; //Notification_show("无网络或非校园网,请重启或者离线");
+                if (HaveNetFlag == 0)
+                    HaveNetFlag = 2;
             }
         };
         Timer timer = new Timer();
-        timer.schedule(task, 3000);
+        timer.schedule(task, 1000);
+        return HaveNetFlag;
     }
 
     private final class MyWebViewClient extends WebViewClient {
