@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
     private int startcounts = 0;
     private ArrayList<Integer> wallpapers = new ArrayList<>();
     private Toolbar toolbar;
-    private Handler dishandler;
+
     private TimeInfo timeshow;
     private WebView webview;
     private Webget webget;
@@ -85,15 +85,11 @@ public class MainActivity extends AppCompatActivity
         Intent intent = getIntent();
         htmlbody = intent.getStringExtra("HtmlBody");
         WrongNet = intent.getIntExtra("WrongNet", 1);
-        Toast netcheck = Toast.makeText(getApplicationContext(),
-                "自定义位置Toast", Toast.LENGTH_LONG);
-        netcheck.setGravity(Gravity.TOP, 0, 200);
+
         if (WrongNet == 0) {
-            netcheck.setText("教室信息已更新");
-            netcheck.show();
+            showAlertDialog(8);
         } else {
-            netcheck.setText("教室信息更新失败，请刷新");
-            netcheck.show();
+            showAlertDialog(9);
         }
 
         this.setTitle("首页");
@@ -135,7 +131,6 @@ public class MainActivity extends AppCompatActivity
             toolbar.setBackgroundColor(maincolor);
         }
 
-        dishandler = new DisplayHandler();
         timeshow = new TimeInfo();
 
         profileBt.setOnClickListener(new View.OnClickListener() {
@@ -152,9 +147,7 @@ public class MainActivity extends AppCompatActivity
             try {
                 if (htmlbody == null || !htmlbody.contains("楼"))
                     if (CheckDownloadHtml(MainActivity.this)) {
-                        Message msg = dishandler.obtainMessage();
-                        msg.what = 1;
-                        dishandler.sendMessage(msg);
+                        showAlertDialog(1);
                     }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -171,7 +164,6 @@ public class MainActivity extends AppCompatActivity
 
 
     }
-
 
     public boolean CheckDownloadHtml(Context context) throws IOException {
         /**
@@ -269,29 +261,21 @@ public class MainActivity extends AppCompatActivity
             return true;
         } else if (id == R.id.timeinfo) {
             timeshow.timesetting();
-            Message msg = dishandler.obtainMessage();
-            msg.what = 2;
-            dishandler.sendMessage(msg);
+            showAlertDialog(2);
         } else if (id == R.id.download) {
             if (WrongNet == 1) {
 //                Log.i(TAG, "离线下载错误");
-                Message msg = dishandler.obtainMessage();
-                msg.what = 3;
-                dishandler.sendMessage(msg);
+                showAlertDialog(3);
 
             } else {
                 try {
                     if (CheckDownloadHtml(MainActivity.this)) {
 //                        Log.i(TAG, "今日已经离线");
-                        Message msg = dishandler.obtainMessage();
-                        msg.what = 4;
-                        dishandler.sendMessage(msg);
+                        showAlertDialog(4);
                     } else {
                         DownloadHtml(MainActivity.this);
 //                        Log.i(TAG, "离线成功");
-                        Message msg = dishandler.obtainMessage();
-                        msg.what = 5;
-                        dishandler.sendMessage(msg);
+                        showAlertDialog(5);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -319,13 +303,9 @@ public class MainActivity extends AppCompatActivity
                 }
             }, 2000);
             if (WrongNet == 0) {
-                Message msg = dishandler.obtainMessage();
-                msg.what = 8;
-                dishandler.sendMessage(msg);
+                showAlertDialog(8);
             } else {
-                Message msg = dishandler.obtainMessage();
-                msg.what = 9;
-                dishandler.sendMessage(msg);
+                showAlertDialog(9);
             }
         }
         return super.onOptionsItemSelected(item);
@@ -345,9 +325,7 @@ public class MainActivity extends AppCompatActivity
 
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Message msg = dishandler.obtainMessage();
-            msg.what = 6;
-            dishandler.sendMessage(msg);
+            showAlertDialog(6);
         }
     }
 
@@ -366,7 +344,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.jiaoshi) {
             if (WrongNet == 1) {
-                showAlertDialog();
+                showAlertDialog(7);
             } else {
                 if (isServiceWork(MainActivity.this, "thinkwee.buptroom.ShakeService")) {
                     Intent stopintent = new Intent(this, ShakeService.class);
@@ -426,7 +404,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.shake) {
             if (WrongNet == 1) {
-                showAlertDialog();
+                showAlertDialog(7);
             } else {
                 this.setTitle("摇一摇");
                 Intent intent = new Intent();
@@ -447,7 +425,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void showAlertDialog() {
+    private void showAlertDialog(int wrongnum) {
         /**
          * Created by Thinkwee on 2016/9/28 0028 9:29
          * Parameter []
@@ -455,9 +433,12 @@ public class MainActivity extends AppCompatActivity
          * CLASS:MainActivity
          * FILE:MainActivity.java
          */
+        Handler dishandler;
+        dishandler = new DisplayHandler();
         Message msg = dishandler.obtainMessage();
-        msg.what = 7;
+        msg.what = wrongnum;
         dishandler.sendMessage(msg);
+
     }
 
     public boolean isServiceWork(Context mContext, String serviceName) {
@@ -584,13 +565,18 @@ public class MainActivity extends AppCompatActivity
                     builder.show();
                     break;
                 case 8:
-                    Snackbar.make(snackbartemp, "刷新成功", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    Toast netcheckok = Toast.makeText(getApplicationContext(),
+                            "", Toast.LENGTH_LONG);
+                    netcheckok.setGravity(Gravity.TOP, 0, 200);
+                    netcheckok.setText("教室信息已更新");
+                    netcheckok.show();
                     break;
                 case 9:
-                    Snackbar.make(snackbartemp, "刷新失败", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                    break;
+                    Toast netcheckwrong = Toast.makeText(getApplicationContext(),
+                            "", Toast.LENGTH_LONG);
+                    netcheckwrong.setGravity(Gravity.TOP, 0, 200);
+                    netcheckwrong.setText("教室信息更新失败，请刷新");
+                    netcheckwrong.show();
                 default:
                     break;
 
