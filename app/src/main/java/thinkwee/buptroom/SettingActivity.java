@@ -16,18 +16,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import android.view.View;
-import android.widget.Toast;
 
-/**
+/*
  * Created by think on 20162016/10/9 00098:48
  * PACKAGE:thinkwee.buptroom
  * PROJECT:BuptRoom
@@ -40,7 +33,6 @@ public class SettingActivity extends AppCompatActivity {
     private thinkwee.buptroom.ColorPicker colorpicker;
     private int getcolorint;
     private LinearLayout settinglayout;
-    private int savecolor;
     private String red;
     private String green;
     private String blue;
@@ -52,7 +44,6 @@ public class SettingActivity extends AppCompatActivity {
     private int mindis = 195075;//255*255*3
     private int maxnum = 0;
     private int btflag = 0;
-    private int choosepic;
     private int fisrt = 0;
 
     private ArrayList<Integer> wallpapers = new ArrayList<>();
@@ -114,7 +105,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public int findmaxnum(int r, int g, int b) {
-        /**
+        /*
          * Created by Thinkwee on 2016/10/26 0026 17:07
          * Parameter [r, g, b] 当前颜色的rgb
          * Return int
@@ -124,7 +115,7 @@ public class SettingActivity extends AppCompatActivity {
 
         int i;
         int maxi = 0;
-        int temp = 0;
+        int temp;
         for (i = 0; i < 22; i++) {
             temp = (r - colorr[i]) * (r - colorr[i]) + (g - colorg[i]) * (g - colorg[i]) + (b - colorb[i]) * (b - colorb[i]);
             if (temp < mindis) {
@@ -190,7 +181,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public void SaveColorNow(View view) {
-        /**
+        /*
          * Created by Thinkwee on 2016/10/13 0013 11:12
          * Parameter [context]上下文
          * Return void
@@ -204,12 +195,12 @@ public class SettingActivity extends AppCompatActivity {
         } else {
             Snackbar.make(savebt, "修改主题成功，重启后生效", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-            SharedPreferences sharedPreferences = getSharedPreferences("colorsave", Context.MODE_APPEND);
+            SharedPreferences sharedPreferences = getSharedPreferences("colorsave", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("maincolor", Color.parseColor("#" + red + green + blue));
             editor.putInt("imgnum", maxnum);
             Log.i(TAG, Integer.toString(maxnum));
-            editor.commit();//提交修改
+            editor.apply();//提交修改
         }
 
 

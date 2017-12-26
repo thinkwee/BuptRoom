@@ -21,25 +21,25 @@ import java.util.TimerTask;
  * TODO:取消webview，改用爬虫
  */
 
-public class Webget {
+class Webget {
     private WebView webView;
     private int HaveNetFlag = 0;
     private String htmlbody = null;
     private int WrongNet = 2;
 
-    public void init(WebView wb) {
+    void init(WebView wb) {
         webView = wb;
     }
 
-    public int getWrongnet() {
+    int getWrongnet() {
         return WrongNet;
     }
 
-    public String getHtmlbody() {
+    String getHtmlbody() {
         return htmlbody;
     }
 
-    public int getHaveNetFlag() {
+    int getHaveNetFlag() {
         return HaveNetFlag;
     }
 
@@ -68,8 +68,8 @@ public class Webget {
     }
 
 
-    public int WebInit() {
-        /**
+    int WebInit() {
+        /*
          * Created by Thinkwee on 2016/10/8 0008 21:23
          * Parameter []
          * Return void

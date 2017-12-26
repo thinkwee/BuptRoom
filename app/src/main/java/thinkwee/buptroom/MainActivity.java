@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,7 +43,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.hugeterry.updatefun.UpdateFunGO;
@@ -69,8 +67,6 @@ public class MainActivity extends AppCompatActivity
     private Button snackbartemp;
     public static final String TAG = "MainActivity";
     private int startcounts = 0;
-    private ArrayList<Integer> wallpapers = new ArrayList<>();
-    private Toolbar toolbar;
 
     private TimeInfo timeshow;
     private WebView webview;
@@ -114,8 +110,7 @@ public class MainActivity extends AppCompatActivity
         View headview = navigationView.inflateHeaderView(R.layout.nav_header_main);
         ImageButton profileBt = (ImageButton) headview.findViewById(R.id.profile);
 
-        wallpapersinit();
-        SharedPreferences sharedPreferences = getSharedPreferences("colorsave", Context.MODE_APPEND);
+        SharedPreferences sharedPreferences = getSharedPreferences("colorsave", Context.MODE_PRIVATE);
         int maincolor = sharedPreferences.getInt("maincolor", 0);
         Log.i("maincolor", maincolor + "");
 
@@ -166,7 +161,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public boolean CheckDownloadHtml(Context context) throws IOException {
-        /**
+        /*
          * Created by Thinkwee on 2016/10/15 0015 11:42
          * Parameter [context] 上下文
          * Return boolean
@@ -191,7 +186,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void AppStartCounts() {
-        /**
+        /*
          * Created by Thinkwee on 2016/10/13 0013 11:12
          * Parameter [context]上下文
          * Return void
@@ -199,16 +194,16 @@ public class MainActivity extends AppCompatActivity
          * FILE:MainActivity.java
          */
 
-        SharedPreferences sharedPreferences = getSharedPreferences("startcount", Context.MODE_APPEND);
+        SharedPreferences sharedPreferences = getSharedPreferences("startcount", Context.MODE_PRIVATE);
         startcounts = sharedPreferences.getInt("startcount", 0);
         startcounts++;
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("startcount", startcounts);
-        editor.commit();//提交修改
+        editor.apply();//提交修改
     }
 
     public void DownloadHtml(Context context) {
-        /**
+        /*
          * Created by Thinkwee on 2016/10/13 0013 11:12
          * Parameter [context]上下文
          * Return void
@@ -243,7 +238,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        /**
+        /*
          * Created by Thinkwee on 2016/10/12 0012 9:58
          * Parameter [item]
          * Return boolean
@@ -313,7 +308,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        /**
+        /*
          * Created by Thinkwee on 2016/10/12 0012 9:58
          * Parameter []
          * Return void
@@ -332,7 +327,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        /**
+        /*
          * Created by Thinkwee on 2016/9/28 0028 9:27
          * Parameter [item]
          * Return boolean
@@ -346,7 +341,7 @@ public class MainActivity extends AppCompatActivity
             if (WrongNet == 1) {
                 showAlertDialog(7);
             } else {
-                if (isServiceWork(MainActivity.this, "thinkwee.buptroom.ShakeService")) {
+                if (isServiceWork(MainActivity.this)) {
                     Intent stopintent = new Intent(this, ShakeService.class);
                     stopService(stopintent);
                 }
@@ -362,7 +357,7 @@ public class MainActivity extends AppCompatActivity
                 transaction.commit();
             }
         } else if (id == R.id.developer_opensource) {
-            if (isServiceWork(MainActivity.this, "thinkwee.buptroom.ShakeService")) {
+            if (isServiceWork(MainActivity.this)) {
                 Intent stopintent = new Intent(this, ShakeService.class);
                 stopService(stopintent);
             }
@@ -373,7 +368,7 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.frame, aboutfragment);
             transaction.commit();
         } else if (id == R.id.version) {
-            if (isServiceWork(MainActivity.this, "thinkwee.buptroom.ShakeService")) {
+            if (isServiceWork(MainActivity.this)) {
                 Intent stopintent = new Intent(this, ShakeService.class);
                 stopService(stopintent);
             }
@@ -384,7 +379,7 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.frame, versionfragment);
             transaction.commit();
         } else if (id == R.id.homepage) {
-            if (isServiceWork(MainActivity.this, "thinkwee.buptroom.ShakeService")) {
+            if (isServiceWork(MainActivity.this)) {
                 Intent stopintent = new Intent(this, ShakeService.class);
                 stopService(stopintent);
             }
@@ -395,7 +390,7 @@ public class MainActivity extends AppCompatActivity
             transaction.replace(R.id.frame, homepagefragment);
             transaction.commit();
         } else if (id == R.id.theme_choose) {
-            if (isServiceWork(MainActivity.this, "thinkwee.buptroom.ShakeService")) {
+            if (isServiceWork(MainActivity.this)) {
                 Intent stopintent = new Intent(this, ShakeService.class);
                 stopService(stopintent);
             }
@@ -426,7 +421,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void showAlertDialog(int wrongnum) {
-        /**
+        /*
          * Created by Thinkwee on 2016/9/28 0028 9:29
          * Parameter []
          * Return void
@@ -441,8 +436,8 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public boolean isServiceWork(Context mContext, String serviceName) {
-        /**
+    public boolean isServiceWork(Context mContext) {
+        /*
          * Created by Thinkwee on 2016/10/12 0012 19:30
          * Parameter [mContext, serviceName]
          * Return boolean
@@ -459,43 +454,19 @@ public class MainActivity extends AppCompatActivity
         boolean isWork = false;
         ActivityManager myAM = (ActivityManager) mContext
                 .getSystemService(Context.ACTIVITY_SERVICE);
+        assert myAM != null;
         List<ActivityManager.RunningServiceInfo> myList = myAM.getRunningServices(100);
         if (myList.size() <= 0) {
             return false;
         }
         for (int i = 0; i < myList.size(); i++) {
             String mName = myList.get(i).service.getClassName();
-            if (mName.equals(serviceName)) {
+            if (mName.equals("thinkwee.buptroom.ShakeService")) {
                 isWork = true;
                 break;
             }
         }
         return isWork;
-    }
-
-    public void wallpapersinit() {
-        wallpapers.add(R.drawable.ailv);
-        wallpapers.add(R.drawable.chabai);
-        wallpapers.add(R.drawable.chase);
-        wallpapers.add(R.drawable.chi);
-        wallpapers.add(R.drawable.dai);
-        wallpapers.add(R.drawable.dailan);
-        wallpapers.add(R.drawable.dianqing);
-        wallpapers.add(R.drawable.feise);
-        wallpapers.add(R.drawable.guan);
-        wallpapers.add(R.drawable.hupo);
-        wallpapers.add(R.drawable.jiangzi);
-        wallpapers.add(R.drawable.li);
-        wallpapers.add(R.drawable.qiuxiangse);
-        wallpapers.add(R.drawable.shuilv);
-        wallpapers.add(R.drawable.tan);
-        wallpapers.add(R.drawable.tuose);
-        wallpapers.add(R.drawable.yan);
-        wallpapers.add(R.drawable.yanzhi);
-        wallpapers.add(R.drawable.yaqing);
-        wallpapers.add(R.drawable.yase);
-        wallpapers.add(R.drawable.yuebai);
-        wallpapers.add(R.drawable.zhuqing);
     }
 
     @Override
@@ -541,7 +512,7 @@ public class MainActivity extends AppCompatActivity
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     // 点击“确认”后的操作
-                                    if (isServiceWork(MainActivity.this, "thinkwee.buptroom.ShakeService")) {
+                                    if (isServiceWork(MainActivity.this)) {
                                         Intent stopintent = new Intent(MainActivity.this, ShakeService.class);
                                         Log.i(TAG, "The ShakeService has been closed");
                                         stopService(stopintent);

@@ -1,6 +1,6 @@
 package thinkwee.buptroom;
 
-/**
+/*
  * Created by think on 20162016/10/25 002511:14
  * PACKAGE:thinkwee.buptroom
  * PROJECT:BuptRoom

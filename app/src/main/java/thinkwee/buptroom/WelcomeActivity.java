@@ -1,40 +1,20 @@
 package thinkwee.buptroom;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.jsoup.Jsoup;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Timer;
-import java.util.TimerTask;
-
-/**
+/*
  * Created by think on 20162016/10/9 000920:57
  * PACKAGE:thinkwee.buptroom
  * PROJECT:BuptRoom
@@ -43,7 +23,6 @@ import java.util.TimerTask;
 public class WelcomeActivity extends Activity {
 
     private Webget webget;
-    private WebView webView;
     private int HaveNetFlag = 0;
     private String htmlbody = null;
     private int WrongNet = 2;
@@ -52,7 +31,7 @@ public class WelcomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
-        webView = (WebView) findViewById(R.id.GetHtml);
+        WebView webView = (WebView) findViewById(R.id.GetHtml);
         AssetManager mgr = getAssets();//得到AssetManager
         Typeface tf = Typeface.createFromAsset(mgr, "fonts/Roboto-Italic.ttf");//根据路径得到Typeface
         TextView chickensoup = (TextView) findViewById(R.id.chicken_soup);

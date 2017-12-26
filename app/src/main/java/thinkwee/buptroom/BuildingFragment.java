@@ -1,10 +1,7 @@
 package thinkwee.buptroom;
 
-import android.annotation.SuppressLint;
 import android.app.Fragment;
-import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -20,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by think on 20162016/10/6 000614:05
@@ -87,7 +83,7 @@ public class BuildingFragment extends Fragment {
         view5.setScrollContainer(true);
         SetPage(view5, "图书馆");
 
-        ArrayList<View> views = new ArrayList<View>();
+        ArrayList<View> views = new ArrayList<>();
         views.add(view1);
         views.add(view2);
         views.add(view3);
@@ -95,7 +91,7 @@ public class BuildingFragment extends Fragment {
         views.add(view5);
 
         //加标题
-        ArrayList<String> titles = new ArrayList<String>();
+        ArrayList<String> titles = new ArrayList<>();
         titles.add("教一楼空闲教室");
         titles.add("教二空闲教室");
         titles.add("教三空闲教室");
@@ -155,7 +151,7 @@ public class BuildingFragment extends Fragment {
     }
 
     public void SetPage(View view, String buildingname) {
-        /**
+        /*
          * Created by Thinkwee on 2016/10/12 0012 9:56
          * Parameter [view, buildingname]要显示文字的view,显示内容所属的楼名
          * Return void
@@ -164,7 +160,7 @@ public class BuildingFragment extends Fragment {
          */
 
         TextView t12, t34, t56, t78, t9, t1011;
-        ArrayList<String> tempclass = new ArrayList<String>();
+        ArrayList<String> tempclass = new ArrayList<>();
         tempclass.clear();
         tempclass = emptyroom.get_show_content(buildingname, htmlbody);
         t12 = (TextView) view.findViewById(R.id.jie12);

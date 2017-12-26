@@ -1,6 +1,5 @@
 package thinkwee.buptroom;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,8 +22,8 @@ public class ShakeTestActivity extends AppCompatActivity {
     private int nowclass = 0;//现在时间所处节数，用于emptyroom.get_show_content返回数组的下标
     private TimeInfo timeinfo = new TimeInfo();
     private String htmlbody = "";
-    private ArrayList<String> BuildingName = new ArrayList<String>();
-    private ArrayList<String> tempclass = new ArrayList<String>();
+    private ArrayList<String> BuildingName = new ArrayList<>();
+    private ArrayList<String> tempclass = new ArrayList<>();
     private EmptyRoom emptyroom = new EmptyRoom();
 
     @Override
@@ -76,11 +75,10 @@ public class ShakeTestActivity extends AppCompatActivity {
     private String Handle() {
         int countmax = 0;
         int maxi = 0;
-        String temp = "";
-        String result = "";
+        String temp;
+        String result;
         int roomcount = 0;
-        ArrayList<String> resultroom = new ArrayList<String>();
-        int len = 0;
+        ArrayList<String> resultroom = new ArrayList<>();
         if (nowclass == 6)
             return "现在是休息时间";
         else {

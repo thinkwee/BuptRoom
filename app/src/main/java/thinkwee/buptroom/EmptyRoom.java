@@ -18,21 +18,24 @@ import java.util.Objects;
 class EmptyRoom {
 
     private String[] RawRoomInfo = null;//将htmlbody去逗号，按空格和冒号分割后得到的优化信息
-    private int count = 0;
-    private ArrayList<String> j12 = new ArrayList<String>();
-    private ArrayList<String> j34 = new ArrayList<String>();
-    private ArrayList<String> j56 = new ArrayList<String>();
-    private ArrayList<String> j78 = new ArrayList<String>();
-    private ArrayList<String> j9 = new ArrayList<String>();
-    private ArrayList<String> j1011 = new ArrayList<String>();
-    private int tsgflag = 0;
-    private int cishu = 0;
+    private ArrayList<String> j12;
+    private ArrayList<String> j34;
+    private ArrayList<String> j56;
+    private ArrayList<String> j78;
+    private ArrayList<String> j9;
+    private ArrayList<String> j1011;
 
     EmptyRoom() {
+        j12 = new ArrayList<String>();
+        j34 = new ArrayList<String>();
+        j56 = new ArrayList<String>();
+        j78 = new ArrayList<String>();
+        j9 = new ArrayList<String>();
+        j1011 = new ArrayList<String>();
     }
 
     ArrayList<String> get_show_content(String keyword, String htmlbody) {
-        /**
+        /*
          * Created by Thinkwee on 2016/9/29 0029 17:54
          * Parameter [keyword, htmlbody] 楼名，网页拉取到的html_body内容
          * Return java.lang.String
@@ -42,16 +45,18 @@ class EmptyRoom {
 
 
         String htmlbodytemp = htmlbody;
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         htmlbody = "";
         String[] contentstemp = htmlbodytemp.split(",");
+        StringBuilder htmlbodyBuilder = new StringBuilder(htmlbody);
         for (String temp : contentstemp) {
-            htmlbody = htmlbody + temp;
+            htmlbodyBuilder.append(temp);
         }
-        RawRoomInfo = htmlbody.split(" |:");
-        count = 0;
-        tsgflag = 0;
-        cishu = 0;
+        htmlbody = htmlbodyBuilder.toString();
+        RawRoomInfo = htmlbody.split("[ :]");
+        int count = 0;
+        int tsgflag = 0;
+        int cishu = 0;
         j12.clear();
         j34.clear();
         j56.clear();
@@ -105,7 +110,7 @@ class EmptyRoom {
 
 
     private void SaveBuidlingInfo(int k, int c) {
-        /**
+        /*
          * Created by Thinkwee on 2016/9/28 0028 9:28
          * Parameter [k, c]当前字符串数组下标，节次
          * Return void
@@ -146,7 +151,7 @@ class EmptyRoom {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private String settlecontent(ArrayList<String> target) {
 
-        /**
+        /*
          * Created by Thinkwee on 2016/9/28 0028 9:30
          * Parameter [target]
          * Return java.lang.String
@@ -158,26 +163,26 @@ class EmptyRoom {
         if (target.isEmpty()) return "无空闲教室";
 
         int len = target.size();
-        String f1 = "";
-        String f2 = "";
-        String f3 = "";
-        String f4 = "";
-        String f5 = "";
+        StringBuilder f1 = new StringBuilder();
+        StringBuilder f2 = new StringBuilder();
+        StringBuilder f3 = new StringBuilder();
+        StringBuilder f4 = new StringBuilder();
+        StringBuilder f5 = new StringBuilder();
         String result = "";
 
         for (int i = 0; i < len; i++) {
-            if (target.get(i).contains("-1")) f1 = f1 + target.get(i) + " ";
-            else if (target.get(i).contains("-2")) f2 = f2 + target.get(i) + " ";
-            else if (target.get(i).contains("-3")) f3 = f3 + target.get(i) + " ";
-            else if (target.get(i).contains("-4")) f4 = f4 + target.get(i) + " ";
-            else if (target.get(i).contains("-5")) f5 = f5 + target.get(i) + " ";
+            if (target.get(i).contains("-1")) f1.append(target.get(i)).append(" ");
+            else if (target.get(i).contains("-2")) f2.append(target.get(i)).append(" ");
+            else if (target.get(i).contains("-3")) f3.append(target.get(i)).append(" ");
+            else if (target.get(i).contains("-4")) f4.append(target.get(i)).append(" ");
+            else if (target.get(i).contains("-5")) f5.append(target.get(i)).append(" ");
             else if (target.get(i).contains("图书")) result = "图书馆一楼";
         }
-        if (!Objects.equals(f1, "")) result = result + "一楼：" + f1 + "\n";
-        if (!Objects.equals(f2, "")) result = result + "二楼：" + f2 + "\n";
-        if (!Objects.equals(f3, "")) result = result + "三楼：" + f3 + "\n";
-        if (!Objects.equals(f4, "")) result = result + "四楼：" + f4 + "\n";
-        if (!Objects.equals(f5, "")) result = result + "五楼：" + f5 + "\n";
+        if (!Objects.equals(f1.toString(), "")) result = result + "一楼：" + f1 + "\n";
+        if (!Objects.equals(f2.toString(), "")) result = result + "二楼：" + f2 + "\n";
+        if (!Objects.equals(f3.toString(), "")) result = result + "三楼：" + f3 + "\n";
+        if (!Objects.equals(f4.toString(), "")) result = result + "四楼：" + f4 + "\n";
+        if (!Objects.equals(f5.toString(), "")) result = result + "五楼：" + f5 + "\n";
         return result;
 
     }

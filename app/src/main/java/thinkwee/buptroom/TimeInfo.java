@@ -1,8 +1,5 @@
 package thinkwee.buptroom;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -23,7 +20,7 @@ class TimeInfo {
     }
 
     void timesetting() {
-        /**
+        /*
          * Created by Thinkwee on 2016/9/28 0028 9:30
          * Parameter []
          * Return void
