@@ -16,9 +16,8 @@ import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
+/*
  * Created by thinkwee on 2017/4/6.
- * TODO:取消webview，改用爬虫
  */
 
 class Webget {

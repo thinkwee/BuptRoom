@@ -7,7 +7,7 @@ android {
         applicationId "thinkwee.buptroom"
         minSdkVersion 21
         targetSdkVersion 24
-        versionCode 28
+        versionCode 29
         versionName "1.6.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
