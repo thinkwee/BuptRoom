@@ -47,6 +47,15 @@ import java.util.List;
 
 import cn.hugeterry.updatefun.UpdateFunGO;
 import cn.hugeterry.updatefun.config.UpdateKey;
+import thinkwee.buptroom.services.ShakeService;
+import thinkwee.buptroom.services.TimeInfo;
+import thinkwee.buptroom.services.Webget;
+import thinkwee.buptroom.fragment.AboutFragment;
+import thinkwee.buptroom.fragment.BuildingFragment;
+import thinkwee.buptroom.fragment.HomePageFragment;
+import thinkwee.buptroom.fragment.ShakeFragment;
+import thinkwee.buptroom.fragment.VersionFragment;
+import thinkwee.buptroom.utils.CustomPopDialog;
 
 
 public class MainActivity extends AppCompatActivity
@@ -133,7 +142,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.putExtra("StartCounts", startcounts);
-                intent.setClassName(MainActivity.this, "thinkwee.buptroom.ProfileActivity");
+                intent.setClassName(MainActivity.this, "thinkwee.buptroom.activity.ProfileActivity");
                 startActivity(intent);
             }
         });
@@ -395,7 +404,7 @@ public class MainActivity extends AppCompatActivity
                 stopService(stopintent);
             }
             Intent intent = new Intent();
-            intent.setClassName(this, "thinkwee.buptroom.SettingActivity");
+            intent.setClassName(this, "thinkwee.buptroom.activity.SettingActivity");
             startActivity(intent);
         } else if (id == R.id.shake) {
             if (WrongNet == 1) {
@@ -461,7 +470,7 @@ public class MainActivity extends AppCompatActivity
         }
         for (int i = 0; i < myList.size(); i++) {
             String mName = myList.get(i).service.getClassName();
-            if (mName.equals("thinkwee.buptroom.ShakeService")) {
+            if (mName.equals("thinkwee.buptroom.services.ShakeService")) {
                 isWork = true;
                 break;
             }

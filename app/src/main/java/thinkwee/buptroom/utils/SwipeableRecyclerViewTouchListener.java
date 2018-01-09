@@ -1,5 +1,5 @@
 
-package thinkwee.buptroom;
+package thinkwee.buptroom.utils;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -85,7 +85,7 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
      * @param recyclerView The recycler view whose items should be dismissable by swiping.
      * @param listener     The listener for the swipe events.
      */
-    SwipeableRecyclerViewTouchListener(RecyclerView recyclerView, SwipeListener listener) {
+    public SwipeableRecyclerViewTouchListener(RecyclerView recyclerView, SwipeListener listener) {
         ViewConfiguration vc = ViewConfiguration.get(recyclerView.getContext());
         mSlop = vc.getScaledTouchSlop();
         mMinFlingVelocity = vc.getScaledMinimumFlingVelocity() * 16;
@@ -378,7 +378,7 @@ public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTo
      * The callback interface used by {@link SwipeableRecyclerViewTouchListener} to inform its client
      * about a swipe of one or more list item positions.
      */
-    interface SwipeListener {
+    public interface SwipeListener {
         /**
          * Called to determine whether the given position can be swiped to the left.
          */

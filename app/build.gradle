@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '25.0.2'
+//    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "thinkwee.buptroom"
         minSdkVersion 21
         targetSdkVersion 24
-        versionCode 29
+        versionCode 30
         versionName "1.6.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

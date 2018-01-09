@@ -18,21 +18,21 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="thinkwee.buptroom.SettingActivity"
+            android:name="thinkwee.buptroom.activity.SettingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="thinkwee.buptroom.ShakeTestActivity"
+            android:name="thinkwee.buptroom.activity.ShakeTestActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="thinkwee.buptroom.ProfileActivity"
+            android:name="thinkwee.buptroom.activity.ProfileActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="thinkwee.buptroom.WelcomeActivity"
+            android:name="thinkwee.buptroom.activity.WelcomeActivity"
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,7 +42,7 @@
         </activity>
 
         <service
-            android:name="thinkwee.buptroom.ShakeService"
+            android:name="thinkwee.buptroom.services.ShakeService"
             android:exported="false" />
 
     </application>

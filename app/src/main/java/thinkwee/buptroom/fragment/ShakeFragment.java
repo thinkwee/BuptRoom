@@ -1,4 +1,4 @@
-package thinkwee.buptroom;
+package thinkwee.buptroom.fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import thinkwee.buptroom.R;
 
 /**
  * Created by think on 20162016/10/11 001121:07

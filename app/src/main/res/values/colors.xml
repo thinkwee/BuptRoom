@@ -6,19 +6,13 @@
     <color name="TextBackGroundColor">#55D8D8D8</color>
     <color name="TextNowCLassBackGroundColor">#BBA2D3AE</color>
     <color name="TextBackGroundColorWelcome">#BB2E2E2E</color>
-
-
     <color name="ripple">#A4A4A4</color>
     <color name="ripple_white">#FFFFFF</color>
-
     <color name="colorPrimaryHotPink">#FF69B4</color>
     <color name="colorPrimaryDarkHotPink">#FF1493</color>
     <color name="colorAccentHotPink">#A4A4A4</color>
-
     <color name="colorPrimaryBlack">#000000</color>
     <color name="colorPrimaryDarkBlack">#000000</color>
     <color name="colorAccentBlack">#A4A4A4</color>
-
     <color name="transparent">#00000000</color>
-
 </resources>

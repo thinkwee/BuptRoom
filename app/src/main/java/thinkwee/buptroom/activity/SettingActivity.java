@@ -1,4 +1,4 @@
-package thinkwee.buptroom;
+package thinkwee.buptroom.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,6 +20,9 @@ import java.util.ArrayList;
 
 import android.view.View;
 
+import thinkwee.buptroom.R;
+import thinkwee.buptroom.utils.ColorPicker;
+
 /*
  * Created by think on 20162016/10/9 00098:48
  * PACKAGE:thinkwee.buptroom
@@ -30,7 +33,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private Button colorbt;
     private Button savebt;
-    private thinkwee.buptroom.ColorPicker colorpicker;
+    private ColorPicker colorpicker;
     private int getcolorint;
     private LinearLayout settinglayout;
     private String red;
@@ -69,7 +72,7 @@ public class SettingActivity extends AppCompatActivity {
         });
         colorbt = (Button) findViewById(R.id.getcolor);
         savebt = (Button) findViewById(R.id.savecolor);
-        colorpicker = (thinkwee.buptroom.ColorPicker) findViewById(R.id.colorPicker);
+        colorpicker = (ColorPicker) findViewById(R.id.colorPicker);
         settinglayout = (LinearLayout) findViewById(R.id.settinglayout);
         colorbt.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

@@ -1,4 +1,4 @@
-package thinkwee.buptroom;
+package thinkwee.buptroom.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import thinkwee.buptroom.utils.MyRecyclerAdapter;
+import thinkwee.buptroom.R;
+import thinkwee.buptroom.utils.SwipeableRecyclerViewTouchListener;
 
 /**
  * Created by think on 20162016/10/8 000821:13

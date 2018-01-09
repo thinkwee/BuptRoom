@@ -1,4 +1,4 @@
-package thinkwee.buptroom;
+package thinkwee.buptroom.services;
 
 
 import java.util.Calendar;
@@ -10,16 +10,16 @@ import java.util.TimeZone;
  * PROJECT:BuptRoom
  */
 
-class TimeInfo {
+public class TimeInfo {
 
-    String nowtime = null;//现在是第几节课
-    int daycount = 0;//周几代号，配合MainActivity中的字符串数组显示每日问候
-    String Timestring = null;//年月日星期几
+    public String nowtime = null;//现在是第几节课
+    public int daycount = 0;//周几代号，配合MainActivity中的字符串数组显示每日问候
+    public String Timestring = null;//年月日星期几
 
-    TimeInfo() {
+    public TimeInfo() {
     }
 
-    void timesetting() {
+    public void timesetting() {
         /*
          * Created by Thinkwee on 2016/9/28 0028 9:30
          * Parameter []

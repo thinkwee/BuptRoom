@@ -1,4 +1,4 @@
-package thinkwee.buptroom;
+package thinkwee.buptroom.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import thinkwee.buptroom.MainActivity;
+import thinkwee.buptroom.R;
+import thinkwee.buptroom.services.Webget;
 
 
 /*

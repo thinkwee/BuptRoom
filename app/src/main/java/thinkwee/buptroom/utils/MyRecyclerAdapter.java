@@ -1,4 +1,4 @@
-package thinkwee.buptroom;
+package thinkwee.buptroom.utils;
 
 /*
  * Created by think on 20162016/10/25 002511:14
@@ -18,12 +18,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
+import thinkwee.buptroom.R;
+
+public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
 
     private List<Map<String, Object>> mDatas;
     private LayoutInflater inflater;
 
-    MyRecyclerAdapter(Context context, List<Map<String, Object>> datas) {
+    public MyRecyclerAdapter(Context context, List<Map<String, Object>> datas) {
         this.mDatas = datas;
         inflater = LayoutInflater.from(context);
     }

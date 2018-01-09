@@ -1,4 +1,4 @@
-package thinkwee.buptroom;
+package thinkwee.buptroom.services;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -20,25 +20,25 @@ import java.util.TimerTask;
  * Created by thinkwee on 2017/4/6.
  */
 
-class Webget {
+public class Webget {
     private WebView webView;
     private int HaveNetFlag = 0;
     private String htmlbody = null;
     private int WrongNet = 2;
 
-    void init(WebView wb) {
+    public void init(WebView wb) {
         webView = wb;
     }
 
-    int getWrongnet() {
+    public int getWrongnet() {
         return WrongNet;
     }
 
-    String getHtmlbody() {
+    public String getHtmlbody() {
         return htmlbody;
     }
 
-    int getHaveNetFlag() {
+    public int getHaveNetFlag() {
         return HaveNetFlag;
     }
 
@@ -67,7 +67,7 @@ class Webget {
     }
 
 
-    int WebInit() {
+    public int WebInit() {
         /*
          * Created by Thinkwee on 2016/10/8 0008 21:23
          * Parameter []

@@ -1,4 +1,4 @@
-package thinkwee.buptroom;
+package thinkwee.buptroom.fragment;
 
 import android.app.Fragment;
 import android.graphics.Color;
@@ -17,6 +17,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import thinkwee.buptroom.services.EmptyRoom;
+import thinkwee.buptroom.R;
+import thinkwee.buptroom.services.TimeInfo;
 
 /**
  * Created by think on 20162016/10/6 000614:05

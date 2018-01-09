@@ -1,4 +1,4 @@
-package thinkwee.buptroom;
+package thinkwee.buptroom.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import thinkwee.buptroom.services.EmptyRoom;
+import thinkwee.buptroom.R;
+import thinkwee.buptroom.services.TimeInfo;
 
 /**
  * Created by think on 20162016/10/12 001211:10

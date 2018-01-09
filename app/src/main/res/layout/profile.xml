@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="thinkwee.buptroom.ProfileActivity"
+    tools:context="thinkwee.buptroom.activity.ProfileActivity"
     android:orientation="vertical"
     android:background="@drawable/wallpaper_4">
 

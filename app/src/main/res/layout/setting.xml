@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:id="@+id/settinglayout"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="thinkwee.buptroom.SettingActivity"
+    tools:context="thinkwee.buptroom.activity.SettingActivity"
 >
 
 
@@ -23,7 +23,7 @@
         >
     </android.support.v7.widget.Toolbar>
 
-    <thinkwee.buptroom.ColorPicker
+    <thinkwee.buptroom.utils.ColorPicker
         android:id="@+id/colorPicker"
         android:layout_width="wrap_content"
         android:layout_height="0sp"

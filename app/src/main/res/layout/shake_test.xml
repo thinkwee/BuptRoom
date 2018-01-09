@@ -6,7 +6,7 @@
     android:clickable="true"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="thinkwee.buptroom.ShakeTestActivity"
+    tools:context="thinkwee.buptroom.activity.ShakeTestActivity"
     android:background="@drawable/wallpaper_4"
     >
 

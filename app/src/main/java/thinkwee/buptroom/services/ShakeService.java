@@ -1,4 +1,4 @@
-package thinkwee.buptroom;
+package thinkwee.buptroom.services;
 
 import android.app.Service;
 import android.content.Context;
@@ -102,7 +102,7 @@ public class ShakeService extends Service {
         Intent intent = new Intent();
         intent.putExtra("htmlbody", htmlbody);
         intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-        intent.setClassName(this, "thinkwee.buptroom.ShakeTestActivity");
+        intent.setClassName(this, "thinkwee.buptroom.activity.ShakeTestActivity");
         startActivity(intent);
     }
 

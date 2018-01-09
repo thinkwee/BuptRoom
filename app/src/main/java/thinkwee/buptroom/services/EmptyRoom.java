@@ -1,4 +1,4 @@
-package thinkwee.buptroom;
+package thinkwee.buptroom.services;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -15,7 +15,7 @@ import java.util.Objects;
  * String Building_Room_empty=emptyroom.get_show_content("楼名",htmlbody);
  */
 
-class EmptyRoom {
+public class EmptyRoom {
 
     private String[] RawRoomInfo = null;//将htmlbody去逗号，按空格和冒号分割后得到的优化信息
     private ArrayList<String> j12;
@@ -25,7 +25,7 @@ class EmptyRoom {
     private ArrayList<String> j9;
     private ArrayList<String> j1011;
 
-    EmptyRoom() {
+    public EmptyRoom() {
         j12 = new ArrayList<String>();
         j34 = new ArrayList<String>();
         j56 = new ArrayList<String>();
@@ -34,7 +34,7 @@ class EmptyRoom {
         j1011 = new ArrayList<String>();
     }
 
-    ArrayList<String> get_show_content(String keyword, String htmlbody) {
+    public ArrayList<String> get_show_content(String keyword, String htmlbody) {
         /*
          * Created by Thinkwee on 2016/9/29 0029 17:54
          * Parameter [keyword, htmlbody] 楼名，网页拉取到的html_body内容

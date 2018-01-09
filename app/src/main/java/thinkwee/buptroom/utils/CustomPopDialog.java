@@ -1,4 +1,4 @@
-package thinkwee.buptroom;
+package thinkwee.buptroom.utils;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,17 +10,19 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 
-class CustomPopDialog extends Dialog {
+import thinkwee.buptroom.R;
+
+public class CustomPopDialog extends Dialog {
 
     private CustomPopDialog(Context context, int theme) {
         super(context, theme);
     }
 
-    static class Builder {
+    public static class Builder {
         private Context context;
         private Bitmap image;
 
-        Builder(Context context) {
+        public Builder(Context context) {
             this.context = context;
         }
 
@@ -28,11 +30,11 @@ class CustomPopDialog extends Dialog {
             return image;
         }
 
-        void setImage(Bitmap image) {
+        public void setImage(Bitmap image) {
             this.image = image;
         }
 
-        CustomPopDialog create() {
+        public CustomPopDialog create() {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final CustomPopDialog dialog = new CustomPopDialog(context, R.style.Dialog);
